@@ -1,29 +1,22 @@
 <template>
-    <page>
-        <action-bar title="{N}-Vue + Rollup"></action-bar>
-        <stack-layout>
-            <label>Count: {{ count }}</label>
-
-            <button @tap="count--">-1</button>
-
-            <test-component style="margin-top: 40;"></test-component>
-        </stack-layout>
-    </page>
+    <stack-layout>
+        <label>Count: {{ count }}</label>
+        <button @tap="count--">-1</button>
+        <test-component style="margin-top: 40;"></test-component>
+    </stack-layout>
 </template>
 
 <script>
     import TestComponent from './TestComponent.vue'
 
     export default {
-
+        components: {
+            TestComponent
+        },
         data() {
             return {
                 count: 10
             }
-        },
-
-        components: {
-            TestComponent
         }
     }
 </script>

@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "nativescript-vue": "^0.1.6",
-    "tns-core-modules": "3.2.0"
+    "tns-core-modules": "3.2.0",
+    "vue-router": "^2.7.0"
   },
   "devDependencies": {
     "rollup": "^0.50.0",
