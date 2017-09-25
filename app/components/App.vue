@@ -7,18 +7,21 @@
 </template>
 
 <script>
-    import TestComponent from './TestComponent.vue'
+  import TestComponent from './TestComponent.vue'
 
-    export default {
-        components: {
-            TestComponent
-        },
-        data() {
-            return {
-                count: 10
-            }
-        }
+  export default {
+    components: {
+      TestComponent
+    },
+    data() {
+      return {
+        count: 10
+      }
+    },
+    mounted() {
+      console.log('APP ON CREATE')
     }
+  }
 </script>
 
 <style scoped>

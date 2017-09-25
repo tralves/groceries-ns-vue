@@ -1,7 +1,6 @@
 .DS_Store
 
 *.js.map
-*.js
 
 !app/samples/*.js
 
@@ -12,3 +11,4 @@
 
 /tns/platforms
 /tns/node_modules
+/tns/app/
