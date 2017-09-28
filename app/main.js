@@ -6,6 +6,10 @@ global.process = { env: {} } // hack! a build process should replace process.env
 
 import App from './components/App.vue'
 import Login from './components/Login.vue'
+import './app.css'
+import { setStatusBarColors } from './utils/statusBar'
+
+setStatusBarColors()
 
 const router = new VueRouter({
   routes: [
@@ -34,10 +38,6 @@ new Vue({
     <page ref="page">
       <action-bar :title="pageTitle"></action-bar>
       <stack-layout>
-        <stack-layout orientation="horizontal" horizontalAlignment="center" class="m-b-20">
-          <button @tap="changeRoute('/login')" class="m-10">Login</button>
-          <button @tap="changeRoute('/app')" class="m-10">App</button>
-        </stack-layout>
         <router-view></router-view>
       </stack-layout>
     </page>
@@ -51,5 +51,9 @@ new Vue({
   },
   mounted() {
     console.log('MAIN ON MOUNTED')
+    this.$root.$refs.page.nativeView.page.backgroundSpanUnderStatusBar = true;
+    this.$nextTick(() => {
+      this.$refs.page.nativeView.actionBarHidden = true
+    })
   }
 }).$start()

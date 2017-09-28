@@ -21,3 +21,10 @@ android {
     additionalParameters "--no-version-vectors"  
   }  
 } 
+
+def settingsGradlePath = "$projectDir/../../app/App_Resources/Android/settings.gradle";
+def settingsGradleFile = new File(settingsGradlePath);
+if(settingsGradleFile.exists())
+{
+    apply from: settingsGradleFile;
+}
