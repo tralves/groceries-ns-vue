@@ -2,6 +2,10 @@ Page {
     font-size: 15;
 }
 
+Page.hidden-action-bar {
+    margin-top: -20;
+}
+
 .list-page {
     background-image: url("res://bg_inner");
     background-repeat: no-repeat;
@@ -23,9 +27,6 @@ TextField {
     text-decoration: line-through;
 }
 
-Page {
-    margin-top: -20;
-}
 
 TextField {
     border-width: 1;

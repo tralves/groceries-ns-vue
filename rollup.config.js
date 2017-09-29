@@ -24,6 +24,11 @@ export default {
 
   ],
   external(id) {
-    return id.startsWith('ui/') || id === 'application' || id === 'color' || id === 'connectivity'
+    return id.startsWith('ui/') ||
+      ['application',
+      'application-settings',
+      'color',
+      'connectivity',
+      'http'].includes(id)
   },
 };

@@ -1,96 +1,490 @@
-label {
-  text-align: center;
-  font-size: 25; }
 
-Button {
-  background-color: #00caab; }
 
-.large {
-  font-size: 40; }
 
-.background {
-  background-image: url("res://bg_login");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+label[data-v-03e18044] {
+    text-align: center;
+    font-size: 25;
+}
+
+Button[data-v-03e18044] {
+    background-color: #00caab;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.large[data-v-7a792824] {
+    font-size: 40;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.background[data-v-10973acc] {
+  background-image: url('res://bg_login');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center; }
+  background-position: center;
+}
+
+.logo-container[data-v-10973acc] {
+  horizontal-align: center;
+  height: 80;
+}
+
+.platform-ios  .background[data-v-10973acc] {
+    background-image: none;
+    background-color: moccasin;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .initial-container {
-  margin-top: 170; }
-
-.initial-logo {
-  horizontal-align: center;
-  margin-bottom: 10; }
+  margin-top: 250;
+}
 
 .initial-label {
   color: white;
   horizontal-align: center;
   margin-bottom: 80;
   font-size: 36;
-  letter-spacing: 0.2; }
+  letter-spacing: 0.2;
+
+  font-size: 40;
+  letter-spacing: 0.2;
+}
 
 .initial-button {
   background-color: white;
   color: #CB1D00;
   height: 45;
   width: 275;
-  vertical-align: center; }
+  vertical-align: center;
+}
 
 .initial-button-label {
   horizontal-align: center;
-  font-weight: bold; }
+  font-weight: bold;
+}
 
-.main-container {
-  visibility: collapse;
-  opacity: 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main-container[data-v-5321e625] {
   margin-left: 30;
   margin-right: 30;
-  background-color: white; }
+  background-color: white;
+  opacity: 0;
 
-.main-label {
+  height: 425;
+  width: 300;
+}
+
+.main-label[data-v-5321e625] {
   horizontal-align: center;
-  color: black; }
+  color: black;
 
-image {
+  color: #311217;
+  font-size: 32;
+  margin-top: 45;
+  margin-bottom: 52;
+  letter-spacing: 0.2;
+}
+
+/* Hide a bunch of things to setup the initial animations */
+.form-controls[data-v-5321e625],
+.sign-up-stack[data-v-5321e625] {
+  opacity: 0;
+}
+
+image[data-v-5321e625] {
   margin-top: 5;
-  margin-bottom: 20; }
+  margin-bottom: 20;
+}
 
-button,
-text-field {
+button[data-v-5321e625],
+text-field[data-v-5321e625] {
   margin-left: 16;
   margin-right: 16;
-  margin-bottom: 10; }
+  margin-bottom: 10;
+}
 
-text-field {
+text-field[data-v-5321e625] {
   color: black;
-  placeholder-color: #ACA6A7; }
+  placeholder-color: #ACA6A7;
 
-text-field.light {
+  border-width: 1;
+  border-color: #6E595C;
+  margin-bottom: 20;
+}
+
+text-field.light[data-v-5321e625] {
   color: #C4AFB4;
-  placeholder-color: #C4AFB4; }
+  placeholder-color: #C4AFB4;
 
-.submit-button {
+  border-color: #C4AFB4;
+}
+
+.submit-button[data-v-5321e625] {
   background-color: #CB1D00;
   color: white;
-  margin-top: 20; }
 
-.forgot-password-label {
+  height: 40;
+  margin-top: 15;
+}
+
+.forgot-password-label[data-v-5321e625] {
   font-size: 13;
   margin-left: 20;
   margin-bottom: 45;
-  color: black; }
+  color: black;
+}
 
-.sign-up-stack {
-  background-color: #311217; }
+.sign-up-stack[data-v-5321e625] {
+  background-color: #311217;
+}
 
-.sign-up-stack Label {
+.sign-up-stack Label[data-v-5321e625] {
   color: white;
   horizontal-align: center;
-  font-size: 15; }
+  font-size: 15;
 
-.logo-container {
-  visibility: collapse;
-  horizontal-align: center;
-  opacity: 0; }
+  height: 48;
+}
 
-page {
-  margin-top: -20; }

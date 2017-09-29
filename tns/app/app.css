@@ -1,12 +1,61 @@
-label {
-  text-align: center;
-  font-size: 25; }
+.action-bar-custom {
+  color: white;
+  margin-top: 20;
+  padding-top: 12; }
 
-Button {
-  background-color: #00caab; }
+.action-bar-custom Label {
+  font-size: 21;
+  font-weight: bold; }
 
-.large {
-  font-size: 40; }
+.action-bar-custom StackLayout {
+  height: 40;
+  padding-left: 15;
+  padding-right: 15;
+  vertical-align: center;
+  horizontal-align: center; }
+
+.add-bar {
+  background-color: #CB1D00;
+  padding-left: 16;
+  padding-right: 16;
+  height: 50; }
+
+.add-bar-image-container {
+  height: 50;
+  vertical-align: center;
+  margin-left: -15;
+  padding-left: 15;
+  padding-right: 13; }
+
+.add-bar Image {
+  height: 20; }
+
+text-field {
+  color: white;
+  placeholder-color: white;
+  background-color: transparent;
+  font-size: 15;
+  border-width: 0;
+  padding: 0;
+  margin-left: 1; }
+
+.add-bar-recent-label {
+  vertical-align: center;
+  color: #311217; }
+
+.add-bar-recent-container {
+  height: 50;
+  padding-left: 10;
+  padding-right: 10;
+  margin-right: -10;
+  vertical-align: center; }
+
+.add-bar-recent-toggle {
+  color: #311217; }
+
+activity-indicator {
+  horizontal-align: center;
+  vertical-align: center; }
 
 .background {
   background-image: url("res://bg_login");
@@ -105,30 +154,3 @@ text-field.light {
   horizontal-align: center;
   font-size: 15;
   height: 48; }
-
-Page {
-  font-size: 15; }
-
-.list-page {
-  background-image: url("res://bg_inner");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; }
-
-ActionBar {
-  background-color: black;
-  color: white; }
-
-TextField {
-  padding: 10;
-  font-size: 13; }
-
-.line-through {
-  text-decoration: line-through; }
-
-Page {
-  margin-top: -20; }
-
-TextField {
-  border-width: 1;
-  border-color: black; }

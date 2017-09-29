@@ -21,7 +21,7 @@
         @returnPress="submit()"
         v-model="user.password"
         :isEnabled="!isAuthenticating"
-        :class="{ light: !isLoggingIn}"
+        :class="{ light: !isLoggingIn }"
         row="1"></text-field>
 
       <activity-indicator :busy="isAuthenticating" rowSpan="2"></activity-indicator>
@@ -47,11 +47,15 @@
 
 <script>
 import { Animation } from 'ui/animation'
+import { prompt } from "ui/dialogs"
 import { Color } from 'color'
-import { connectionType, getConnectionType } from "connectivity";
+import { connectionType, getConnectionType } from "connectivity"
 
 import User from '../models/User'
+import LoginService from '../services/LoginService'
 import alert from '../utils/alert'
+
+const loginService = new LoginService()
 
 export default {
   name: 'login-main',
@@ -72,14 +76,14 @@ export default {
       console.log('visible changed to  ' + val)
       let animations = []
 
-      animations.push({ target: this.$refs.mainContainer.nativeView, opacity: 1, duration: 500 });
+      animations.push({ target: this.$refs.mainContainer.nativeView, opacity: 1, duration: 500 })
 
       // Slide up the form controls and sign up container.
-      animations.push({ target: this.$refs.signUpStack.nativeView, translate: { x: 0, y: 0 }, opacity: 1, delay: 500, duration: 150 });
-      animations.push({ target: this.$refs.formControls.nativeView, translate: { x: 0, y: 0 }, opacity: 1, delay: 650, duration: 150 });
+      animations.push({ target: this.$refs.signUpStack.nativeView, translate: { x: 0, y: 0 }, opacity: 1, delay: 500, duration: 150 })
+      animations.push({ target: this.$refs.formControls.nativeView, translate: { x: 0, y: 0 }, opacity: 1, delay: 650, duration: 150 })
 
       // Kick off the animation queue
-      new Animation(animations, false).play();
+      new Animation(animations, false).play()
     }
   },
   methods: {
@@ -97,7 +101,7 @@ export default {
     submit() {
       console.log(this.user)
       if (!this.user.isValidEmail()) {
-        alert("Enter a valid email address.");
+        alert("Enter a valid email address.")
         return;
       }
 
@@ -110,20 +114,68 @@ export default {
     },
     login() {
       if (getConnectionType() === connectionType.none) {
-        alert("Groceries requires an internet connection to log in.");
+        alert("Groceries requires an internet connection to log in.")
         return;
       }
 
-      this.userService.login(this.user)
-        .subscribe(
-          () => {
-            this.isAuthenticating = false;
-            this.$router.push('/app')
-          },
-          (error) => {
-            alert("Unfortunately we could not find your account.");
-            this.isAuthenticating = false;
-          });
+      return loginService
+        .login(this.user)
+        .then(() => {
+          this.isAuthenticating = false;
+          this.$router.push('/app')
+        })
+        .catch((error) => {
+          console.error(error)
+          alert("Unfortunately we could not find your account.")
+          this.isAuthenticating = false;
+        });
+    },
+    signUp() {
+      if (getConnectionType() === connectionType.none) {
+        alert("Groceries requires an internet connection to register.")
+        return;
+      }
+
+      loginService
+        .register(this.user)
+        .then(() => {
+          alert("Your account was successfully created.")
+          this.isAuthenticating = false;
+          this.toggleDisplay();
+        })
+        .catch(error => {
+          // TODO: Verify if this works
+          if (error.match(/same user/)) {
+            alert("This email address is already in use.")
+          } else {
+            alert("Unfortunately we were unable to create your account.")
+          }
+          this.isAuthenticating = false;
+        });
+    },
+    forgotPassword() {
+      prompt({
+        title: "Forgot Password",
+        message: "Enter the email address you used to register for Groceries to reset your password.",
+        defaultText: "",
+        okButtonText: "Ok",
+        cancelButtonText: "Cancel"
+      }).then((data) => {
+        if (data.result) {
+          this.isAuthenticating = true
+          loginService
+            .resetPassword(data.text.trim())
+            .then(() => {
+              this.isAuthenticating = false
+              alert("Your password was successfully reset. Please check your email for instructions on choosing a new password.")
+            })
+            .catch((error) => {
+              this.isAuthenticating = false
+              console.log('Error resetting password: ' + error)
+              alert("Unfortunately, an error occurred resetting your password.");
+            })
+        }
+      });
     }
   },
   mounted() {

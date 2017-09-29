@@ -1,5 +1,5 @@
 <template>
-  <grid-layout>
+  <grid-layout class='login'>
     <!-- background -->
     <grid-layout ref="background" scaleX="1.4" scaleY="1.4" class="background" @loaded="startBackgroundAnimation()"></grid-layout>
 
@@ -18,6 +18,7 @@
 <script>
 import LoginInitial from './LoginInitial.vue'
 import LoginMain from './LoginMain.vue'
+import enums from 'ui/enums'
 
 export default {
   components: {
@@ -34,7 +35,10 @@ export default {
       console.log('showMainContent')
 
       this.$refs.logoContainer.nativeView
-        .animate({ translate: { x:0, y: -90 }, duration: 1000 })
+        .animate({
+          translate: { x: 0, y: -90 },
+          duration: 500,
+          curve: enums.AnimationCurve.easeIn })
         .then(() => {
           console.log('switching from ' + this.state + ' to main')
           this.state = 'main'
@@ -50,13 +54,11 @@ export default {
   },
   mounted() {
     console.log('LOGIN mounted')
-    this.$root.$refs.page.nativeView.actionBarHidden = true
   }
 }
 </script>
 
 <style scoped>
-
 .background {
   background-image: url('res://bg_login');
   background-repeat: no-repeat;
