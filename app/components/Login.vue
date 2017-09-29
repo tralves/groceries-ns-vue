@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .background {
   background-image: url('res://bg_login');
   background-repeat: no-repeat;

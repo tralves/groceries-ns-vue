@@ -8,7 +8,7 @@ import * as platformModule from "tns-core-modules/platform"
 import BackendService from './services/BackendService'
 import App from './components/App.vue'
 import Login from './components/Login.vue'
-// import './app.css'
+import './app.css'
 import { setStatusBarColors } from './utils/statusBar'
 
 const backendService = new BackendService()
@@ -43,8 +43,8 @@ new Vue({
     pageClasses: function () {
       return {
         'hidden-action-bar': this.actionBarHidden,
-        'platform-ios': platformModule.device.os === 'iOS',
-        'platform-android': platformModule.device.os === 'Android'
+        'platform-ios': platformModule.isIOS,
+        'platform-android': platformModule.isAndroid
       }
     }
   },

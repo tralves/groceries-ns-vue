@@ -1,5 +1,5 @@
 <template>
-  <grid-layout ref='container' rows="auto, auto, *">
+  <grid-layout ref='container' rows="auto, auto, *" class="background">
     <!-- Row 1: The custom action bar -->
     <grid-layout row="0" columns="44, *, auto" class="action-bar-custom">
       <label col="1" text="Groceries"></label>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import * as platformModule from "tns-core-modules/platform"
 import LoginService from '../services/LoginService'
 
 const loginService = new LoginService()
@@ -48,6 +49,10 @@ export default {
   },
   data() {
     return {
+      isShowingRecent: false,
+      isLoading: false,
+      isAndroid: platformModule.isAndroid,
+      grocery: ""
     }
   },
   mounted() {

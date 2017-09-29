@@ -2,7 +2,7 @@ Page {
     font-size: 15;
 }
 
-Page.hidden-action-bar {
+Page.hidden-action-bar.platform-ios {
     margin-top: -20;
 }
 

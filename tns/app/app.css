@@ -154,3 +154,30 @@ text-field.light {
   horizontal-align: center;
   font-size: 15;
   height: 48; }
+
+Page {
+  font-size: 15; }
+
+Page.hidden-action-bar.platform-ios {
+  margin-top: -20; }
+
+.list-page {
+  background-image: url("res://bg_inner");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; }
+
+ActionBar {
+  background-color: black;
+  color: white; }
+
+TextField {
+  padding: 10;
+  font-size: 13; }
+
+.line-through {
+  text-decoration: line-through; }
+
+TextField {
+  border-width: 1;
+  border-color: black; }
