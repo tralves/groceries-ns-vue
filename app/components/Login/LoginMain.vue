@@ -48,12 +48,12 @@
 <script>
 import { Animation } from 'ui/animation'
 import { prompt } from "ui/dialogs"
-import { Color } from 'color'
-import { connectionType, getConnectionType } from "connectivity"
+import { Color } from 'tns-core-modules/color'
+import { connectionType, getConnectionType } from 'tns-core-modules/connectivity'
 
-import User from '../models/User'
-import LoginService from '../services/LoginService'
-import alert from '../utils/alert'
+import User from '/models/User'
+import LoginService from '/services/LoginService'
+import alert from '/utils/alert'
 
 const loginService = new LoginService()
 
@@ -122,7 +122,7 @@ export default {
         .login(this.user)
         .then(() => {
           this.isAuthenticating = false;
-          this.$router.push('/app')
+          this.$router.push('/groceries')
         })
         .catch((error) => {
           console.error(error)
@@ -184,87 +184,92 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.login {
 
-.main-container {
-  margin-left: 30;
-  margin-right: 30;
-  background-color: white;
-  opacity: 0;
+  .main-container {
+    margin-left: 30;
+    margin-right: 30;
+    background-color: white;
+    opacity: 0;
 
-  height: 425;
-  width: 300;
-}
+    height: 425;
+    width: 300;
+  }
 
-.main-label {
-  horizontal-align: center;
-  color: black;
+  .main-label {
+    horizontal-align: center;
+    color: black;
 
-  color: #311217;
-  font-size: 32;
-  margin-top: 45;
-  margin-bottom: 52;
-  letter-spacing: 0.2;
-}
+    color: #311217;
+    font-size: 32;
+    margin-top: 45;
+    margin-bottom: 52;
+    letter-spacing: 0.2;
+  }
 
-/* Hide a bunch of things to setup the initial animations */
-.form-controls,
-.sign-up-stack {
-  opacity: 0;
-}
 
-image {
-  margin-top: 5;
-  margin-bottom: 20;
-}
+  /* Hide a bunch of things to setup the initial animations */
 
-button,
-text-field {
-  margin-left: 16;
-  margin-right: 16;
-  margin-bottom: 10;
-}
+  .form-controls,
+  .sign-up-stack {
+    opacity: 0;
+  }
 
-text-field {
-  color: black;
-  placeholder-color: #ACA6A7;
+  image {
+    margin-top: 5;
+    margin-bottom: 20;
+  }
 
-  border-width: 1;
-  border-color: #6E595C;
-  margin-bottom: 20;
-}
+  button,
+  text-field {
+    margin-left: 16;
+    margin-right: 16;
+    margin-bottom: 10;
+  }
 
-text-field.light {
-  color: #C4AFB4;
-  placeholder-color: #C4AFB4;
+  text-field {
+    color: black;
+    placeholder-color: #ACA6A7;
 
-  border-color: #C4AFB4;
-}
+    border-width: 1;
+    border-color: #6E595C;
+    margin-bottom: 20;
+  }
 
-.submit-button {
-  background-color: #CB1D00;
-  color: white;
+  text-field.light {
+    color: #C4AFB4;
+    placeholder-color: #C4AFB4;
 
-  height: 40;
-  margin-top: 15;
-}
+    border-color: #C4AFB4;
+  }
 
-.forgot-password-label {
-  font-size: 13;
-  margin-left: 20;
-  margin-bottom: 45;
-  color: black;
-}
+  .submit-button {
+    background-color: #CB1D00;
+    color: white;
 
-.sign-up-stack {
-  background-color: #311217;
-}
+    height: 40;
+    margin-top: 15;
+  }
 
-.sign-up-stack Label {
-  color: white;
-  horizontal-align: center;
-  font-size: 15;
+  .forgot-password-label {
+    font-size: 13;
+    margin-left: 20;
+    margin-bottom: 45;
+    color: black;
+  }
 
-  height: 48;
+  .sign-up-stack {
+    background-color: #311217;
+  }
+
+  .sign-up-stack Label {
+    color: white;
+    horizontal-align: center;
+    font-size: 15;
+
+    height: 48;
+  }
+
 }
 </style>

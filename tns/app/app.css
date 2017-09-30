@@ -1,76 +1,73 @@
-.action-bar-custom {
-  color: white;
-  margin-top: 20;
-  padding-top: 12; }
+.list-page {
+  background-image: url("res://bg_inner");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; }
+  .list-page .action-bar-custom {
+    color: white;
+    margin-top: 20;
+    padding-top: 12; }
+    .list-page .action-bar-custom label {
+      font-size: 21;
+      font-weight: bold; }
+    .list-page .action-bar-custom stack-layout {
+      height: 40;
+      padding-left: 15;
+      padding-right: 15;
+      vertical-align: center;
+      horizontal-align: center; }
+  .list-page .add-bar {
+    background-color: #CB1D00;
+    padding-left: 16;
+    padding-right: 16;
+    height: 50; }
+    .list-page .add-bar text-field {
+      height: 20; }
+  .list-page .add-bar-image-container {
+    height: 50;
+    vertical-align: center;
+    margin-left: -15;
+    padding-left: 15;
+    padding-right: 13; }
+    .list-page .add-bar-image-container image {
+      height: 20; }
+  .list-page text-field {
+    color: white;
+    placeholder-color: white;
+    background-color: transparent;
+    font-size: 15;
+    border-width: 0;
+    padding: 0;
+    margin-left: 1; }
+  .list-page .add-bar-recent-label {
+    vertical-align: center;
+    color: #311217; }
+  .list-page .add-bar-recent-container {
+    height: 50;
+    padding-left: 10;
+    padding-right: 10;
+    margin-right: -10;
+    vertical-align: center; }
+  .list-page .add-bar-recent-toggle {
+    color: #311217; }
+  .list-page activity-indicator {
+    horizontal-align: center;
+    vertical-align: center; }
 
-.action-bar-custom Label {
-  font-size: 21;
-  font-weight: bold; }
-
-.action-bar-custom StackLayout {
-  height: 40;
-  padding-left: 15;
-  padding-right: 15;
-  vertical-align: center;
-  horizontal-align: center; }
-
-.add-bar {
-  background-color: #CB1D00;
-  padding-left: 16;
-  padding-right: 16;
-  height: 50; }
-
-.add-bar-image-container {
-  height: 50;
-  vertical-align: center;
-  margin-left: -15;
-  padding-left: 15;
-  padding-right: 13; }
-
-.add-bar Image {
-  height: 20; }
-
-text-field {
-  color: white;
-  placeholder-color: white;
-  background-color: transparent;
-  font-size: 15;
-  border-width: 0;
-  padding: 0;
-  margin-left: 1; }
-
-.add-bar-recent-label {
-  vertical-align: center;
-  color: #311217; }
-
-.add-bar-recent-container {
-  height: 50;
-  padding-left: 10;
-  padding-right: 10;
-  margin-right: -10;
-  vertical-align: center; }
-
-.add-bar-recent-toggle {
-  color: #311217; }
-
-activity-indicator {
-  horizontal-align: center;
-  vertical-align: center; }
-
-.background {
+.login .background {
   background-image: url("res://bg_login");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center; }
 
-.logo-container {
+.login .logo-container {
   horizontal-align: center;
   height: 80; }
 
-.initial-container {
+.login .initial-container {
   margin-top: 250; }
 
-.initial-label {
+.login .initial-label {
   color: white;
   horizontal-align: center;
   margin-bottom: 80;
@@ -79,86 +76,77 @@ activity-indicator {
   font-size: 40;
   letter-spacing: 0.2; }
 
-.initial-button {
+.login .initial-button {
   background-color: white;
   color: #CB1D00;
   height: 45;
   width: 275;
   vertical-align: center; }
 
-.initial-button-label {
+.login .initial-button-label {
   horizontal-align: center;
   font-weight: bold; }
 
-.main-container {
-  margin-left: 30;
-  margin-right: 30;
-  background-color: white;
-  opacity: 0;
-  height: 425;
-  width: 300; }
+.login {
+  /* Hide a bunch of things to setup the initial animations */ }
+  .login .main-container {
+    margin-left: 30;
+    margin-right: 30;
+    background-color: white;
+    opacity: 0;
+    height: 425;
+    width: 300; }
+  .login .main-label {
+    horizontal-align: center;
+    color: black;
+    color: #311217;
+    font-size: 32;
+    margin-top: 45;
+    margin-bottom: 52;
+    letter-spacing: 0.2; }
+  .login .form-controls,
+  .login .sign-up-stack {
+    opacity: 0; }
+  .login image {
+    margin-top: 5;
+    margin-bottom: 20; }
+  .login button,
+  .login text-field {
+    margin-left: 16;
+    margin-right: 16;
+    margin-bottom: 10; }
+  .login text-field {
+    color: black;
+    placeholder-color: #ACA6A7;
+    border-width: 1;
+    border-color: #6E595C;
+    margin-bottom: 20; }
+  .login text-field.light {
+    color: #C4AFB4;
+    placeholder-color: #C4AFB4;
+    border-color: #C4AFB4; }
+  .login .submit-button {
+    background-color: #CB1D00;
+    color: white;
+    height: 40;
+    margin-top: 15; }
+  .login .forgot-password-label {
+    font-size: 13;
+    margin-left: 20;
+    margin-bottom: 45;
+    color: black; }
+  .login .sign-up-stack {
+    background-color: #311217; }
+  .login .sign-up-stack Label {
+    color: white;
+    horizontal-align: center;
+    font-size: 15;
+    height: 48; }
 
-.main-label {
-  horizontal-align: center;
-  color: black;
-  color: #311217;
-  font-size: 32;
-  margin-top: 45;
-  margin-bottom: 52;
-  letter-spacing: 0.2; }
-
-/* Hide a bunch of things to setup the initial animations */
-.form-controls,
-.sign-up-stack {
-  opacity: 0; }
-
-image {
-  margin-top: 5;
-  margin-bottom: 20; }
-
-button,
-text-field {
-  margin-left: 16;
-  margin-right: 16;
-  margin-bottom: 10; }
-
-text-field {
-  color: black;
-  placeholder-color: #ACA6A7;
-  border-width: 1;
-  border-color: #6E595C;
-  margin-bottom: 20; }
-
-text-field.light {
-  color: #C4AFB4;
-  placeholder-color: #C4AFB4;
-  border-color: #C4AFB4; }
-
-.submit-button {
-  background-color: #CB1D00;
-  color: white;
-  height: 40;
-  margin-top: 15; }
-
-.forgot-password-label {
-  font-size: 13;
-  margin-left: 20;
-  margin-bottom: 45;
-  color: black; }
-
-.sign-up-stack {
-  background-color: #311217; }
-
-.sign-up-stack Label {
-  color: white;
-  horizontal-align: center;
-  font-size: 15;
-  height: 48; }
-
-Page {
+page {
   font-size: 15; }
 
-Page.hidden-action-bar.platform-ios {
+page.hidden-action-bar.platform-ios {
   margin-top: -20; }
 
 .list-page {
@@ -167,17 +155,17 @@ Page.hidden-action-bar.platform-ios {
   background-position: center;
   background-size: cover; }
 
-ActionBar {
+action-bar {
   background-color: black;
   color: white; }
 
-TextField {
+text-field {
   padding: 10;
   font-size: 13; }
 
 .line-through {
   text-decoration: line-through; }
 
-TextField {
+text-field {
   border-width: 1;
   border-color: black; }

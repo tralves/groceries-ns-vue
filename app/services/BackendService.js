@@ -1,4 +1,4 @@
-import { getString, setString } from 'application-settings'
+import { getString, setString } from 'tns-core-modules/application-settings'
 
 const tokenKey = "token";
 

@@ -5,9 +5,9 @@ Vue.use(VueRouter)
 global.process = { env: {} } // hack! a build process should replace process.env's with static strings.
 
 import * as platformModule from "tns-core-modules/platform"
-import BackendService from './services/BackendService'
-import App from './components/App.vue'
-import Login from './components/Login.vue'
+import BackendService from '/services/BackendService'
+import Groceries from './components/Groceries/Groceries.vue'
+import Login from './components/Login/Login.vue'
 import './app.css'
 import { setStatusBarColors } from './utils/statusBar'
 
@@ -22,8 +22,8 @@ const router = new VueRouter({
       meta: { hidenActionBar: true }
     },
     {
-      path: '/app',
-      component: App,
+      path: '/groceries',
+      component: Groceries,
       meta: { requiresAuth: true }
     },
     { path: '*', redirect: '/login' }
@@ -34,7 +34,6 @@ new Vue({
   router,
   data() {
     return {
-      pageTitle: 'Current route2: /login',
       actionBarHidden: true
     }
   },
@@ -51,7 +50,6 @@ new Vue({
 
   template: `
     <page ref="page" :class="pageClasses">
-      <action-bar :title="pageTitle"></action-bar>
       <stack-layout>
         <router-view></router-view>
       </stack-layout>
@@ -90,7 +88,7 @@ new Vue({
 
     // force first redirect
     if (backendService.isLoggedIn()) {
-      router.replace('/app')
+      router.replace('/groceries')
     }
     else {
       router.replace('/login')

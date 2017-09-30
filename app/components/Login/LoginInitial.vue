@@ -27,34 +27,36 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.login {
 
-.initial-container {
-  margin-top: 250;
-}
+  .initial-container {
+    margin-top: 250;
+  }
 
-.initial-label {
-  color: white;
-  horizontal-align: center;
-  margin-bottom: 80;
-  font-size: 36;
-  letter-spacing: 0.2;
+  .initial-label {
+    color: white;
+    horizontal-align: center;
+    margin-bottom: 80;
+    font-size: 36;
+    letter-spacing: 0.2;
 
-  font-size: 40;
-  letter-spacing: 0.2;
-}
+    font-size: 40;
+    letter-spacing: 0.2;
+  }
 
-.initial-button {
-  background-color: white;
-  color: #CB1D00;
-  height: 45;
-  width: 275;
-  vertical-align: center;
-}
+  .initial-button {
+    background-color: white;
+    color: #CB1D00;
+    height: 45;
+    width: 275;
+    vertical-align: center;
+  }
 
-.initial-button-label {
-  horizontal-align: center;
-  font-weight: bold;
+  .initial-button-label {
+    horizontal-align: center;
+    font-weight: bold;
+  }
 }
 
 </style>

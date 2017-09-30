@@ -58,17 +58,20 @@ export default {
 }
 </script>
 
-<style>
-.background {
-  background-image: url('res://bg_login');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
+<style lang="scss">
 
-.logo-container {
-  horizontal-align: center;
-  height: 80;
+.login {
+  .background {
+    background-image: url('res://bg_login');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .logo-container {
+    horizontal-align: center;
+    height: 80;
+  }
 }
 
 </style>

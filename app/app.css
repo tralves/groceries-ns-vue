@@ -1,8 +1,8 @@
-Page {
+page {
     font-size: 15;
 }
 
-Page.hidden-action-bar.platform-ios {
+page.hidden-action-bar.platform-ios {
     margin-top: -20;
 }
 
@@ -13,12 +13,12 @@ Page.hidden-action-bar.platform-ios {
     background-size: cover;
 }
 
-ActionBar {
+action-bar {
     background-color: black;
     color: white;
 }
 
-TextField {
+text-field {
     padding: 10;
     font-size: 13;
 }
@@ -28,7 +28,7 @@ TextField {
 }
 
 
-TextField {
+text-field {
     border-width: 1;
     border-color: black;
 }
