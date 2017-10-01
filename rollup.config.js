@@ -2,6 +2,7 @@ import vue from 'rollup-plugin-vue'
 import cleanup from 'rollup-plugin-cleanup'
 import scss from 'rollup-plugin-scss'
 import rootImport from 'rollup-plugin-root-import';
+import babel from 'rollup-plugin-babel';
 
 export default {
   input: './app/main.js',
@@ -26,7 +27,10 @@ export default {
       styleToImports: true,
       compileTemplate: false
     }),
-    scss({ output: './tns/app/app.css'}),
+    scss({ output: './tns/app/app.css' }),
+    babel({
+      exclude: 'node_modules/**'
+    }),
     cleanup({
       extensions: ['.js', '.css']
     })

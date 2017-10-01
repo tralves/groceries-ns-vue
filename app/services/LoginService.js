@@ -20,8 +20,8 @@ export default class LoginService {
         grant_type: "password"
       }),
     })
-    .then(this.validateCode)
-    .then(this.getJson)
+    .then(this.backendService.validateCode)
+    .then(this.backendService.getJson)
     .then(data => {
       console.info('User logged in with token: ' + data.Result.access_token)
       this.backendService.token = data.Result.access_token
@@ -41,8 +41,8 @@ export default class LoginService {
         Password: user.password
       }),
     })
-    .then(this.validateCode)
-    .then(this.getJson)
+    .then(this.backendService.validateCode)
+    .then(this.backendService.getJson)
     .then(data => {
       console.info('User registered: ' + data.Result.Id)
     })
@@ -59,37 +59,15 @@ export default class LoginService {
         Username: email,
       }),
     })
-    .then(this.validateCode)
-    .then(this.getJson)
+    .then(this.backendService.validateCode)
+    .then(this.backendService.getJson)
     .then(data => {
       console.info('Reset password for email: ' + data.Result.Result)
     })
   }
 
-  validateCode(response) {
-    return new Promise((resolve, reject) => {
-      if (response.statusCode >= 200 && response.statusCode < 300 ) {
-        resolve(response)
-      }
-
-      reject('Response with code: ' + response.statusCode +
-      '\nContent: ' + response.content.toString())
-    })
-  }
-
   logout() {
     this.backendService.token = ""
-  }
-
-  getJson(response) {
-    return new Promise((resolve, reject) => {
-      console.info('Content: ' + response.content.toString())
-      resolve(response.content.toJSON())
-    })
-    .catch(e => {
-      console.error('Error parsing JSON response: ' + e)
-      throw 'Error parsing JSON response: ' + e
-    })
   }
 
 }

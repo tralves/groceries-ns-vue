@@ -1,5 +1,5 @@
 <template>
-  <grid-layout ref='container' rows="auto, auto, *" class="list-page">
+  <grid-layout ref='container' rows="auto, auto, *" class="list-page" @loaded="load()">
     <!-- Row 1: The custom action bar -->
     <grid-layout row="0" columns="44, *, auto" class="action-bar-custom">
       <label col="1" text="Groceries"></label>
@@ -16,21 +16,23 @@
       <stack-layout col="0" class="add-bar-image-container"  @tap="add('button')" orientation="vertical">
         <image :src="isShowingRecent ? 'res://recent' : 'res://add'"></image>
       </stack-layout>
+      <label col="1" text="Recent items" v-if="isShowingRecent" class="add-bar-recent-label"></label>
       <text-field ref='groceryTextField' col="1" v-model="grocery"
         @loaded="handleAndroidFocus()"
         :hint="isAndroid ? 'ADD A GROCERY' : 'Add a grocery'"
-        returnKeyType="done" v-if="!isShowingRecent" @returnPress="add('textfield')"></text-field>
-      <label col="1" text="Recent items" v-if="isShowingRecent" class="add-bar-recent-label"></label>
+        returnKeyType="done" v-else @returnPress="add('textfield')"></text-field>
+
       <stack-layout col="2" class="add-bar-recent-container" @tap="toggleRecent()">
         <label class="add-bar-recent-toggle" :text="isShowingRecent ? 'Done' : 'Recent'"></label>
       </stack-layout>
     </grid-layout>
 
     <!-- Row 3: The grocery list -->
-    <!-- <gr-grocery-list row="2"
-      @loading="showActivityIndicator()"
+    <grocery-list :row="2"
       @loaded="hideActivityIndicator()"
-      :showDeleted="isShowingRecent"></gr-grocery-list> -->
+      :listLoaded="listLoaded"
+      :showDeleted="isShowingRecent"
+      :items="items"></grocery-list>
 
     <activity-indicator :busy="isLoading" row="2"></activity-indicator>
 
@@ -43,11 +45,16 @@ import * as platformModule from 'tns-core-modules/platform'
 import { action } from 'ui/dialogs'
 import * as SocialShare from 'nativescript-social-share'
 import LoginService from '/services/LoginService'
+import GroceryList from './GroceryList.vue'
+import alert from '/utils/alert'
+import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 const loginService = new LoginService()
 
 export default {
   components: {
+    GroceryList
   },
   data() {
     return {
@@ -55,15 +62,33 @@ export default {
       isLoading: false,
       isAndroid: platformModule.isAndroid,
       grocery: "",
-      store: {
-        items: []
-      }
+      listLoaded: false
     }
+  },
+  computed: {
+    ...mapGetters({
+      items: 'itemList'
+    })
   },
   mounted() {
     console.log('APP ON CREATE')
   },
   methods: {
+    ...mapActions([
+      'loadItems',
+      'addItem'
+    ]),
+    load() {
+      this
+        .loadItems()
+        .then(() => {
+          this.listLoaded = true
+        })
+        .catch(error => {
+          console.error(error)
+          alert("An error occurred loading your grocery list.");
+        })
+    },
       // Prevent the first textfield from receiving focus on Android
     // See http://stackoverflow.com/questions/5056734/android-force-edittext-to-remove-focus
     handleAndroidFocus() {
@@ -75,6 +100,70 @@ export default {
         textField.android.clearFocus();
       }
     },
+
+    showActivityIndicator() { this.isLoading = true; },
+    hideActivityIndicator() { this.isLoading = false; },
+
+    add(target) {
+      // If showing recent groceries the add button should do nothing.
+      if (this.isShowingRecent) {
+        return
+      }
+
+      const textField = this.$refs.groceryTextField.nativeView
+
+      if (this.grocery.trim() === '') {
+        // If the user clicked the add button, and the textfield is empty,
+        // focus the text field and return.
+        if (target === 'button') {
+            textField.focus();
+          } else {
+            // If the user clicked return with an empty text field show an error.
+            alert('Enter a grocery item');
+          }
+        return
+      }
+
+      // Dismiss the keyboard
+      textField.dismissSoftInput()
+
+      this.showActivityIndicator()
+      this
+        .addItem(this.grocery)
+        .then(() => {
+          this.grocery = "";
+          this.hideActivityIndicator();
+        })
+        .catch(() => {
+            alert("An error occurred while adding an item to your list.");
+            this.hideActivityIndicator();
+          }
+        )
+    },
+
+    toggleRecent() {
+      if (!this.isShowingRecent) {
+        this.isShowingRecent = true;
+        return;
+      }
+
+      // if is showing recent, restore items before going back to the list
+      this.isShowingRecent = false;
+      // this.showActivityIndicator();
+      // restore items???
+      // this.store.restore()
+      //   .subscribe(
+      //   () => {
+      //     this.isShowingRecent = false;
+      //     this.hideActivityIndicator();
+      //   },
+      //   () => {
+      //     alert("An error occurred while adding groceries to your list.");
+      //     this.hideActivityIndicator();
+      //   }
+      //   );
+    },
+
     showMenu() {
       action({
         message: "What would you like to do?",
@@ -88,16 +177,15 @@ export default {
         }
       });
     },
+
     logout: function() {
       loginService.logout()
       this.$router.push('/login')
     },
+
     share() {
-      const items = this.store.items
-      let list = []
-      for (let i = 0, size = items.length; i < size; i++) {
-        list.push(items[i].name)
-      }
+      let list = this.itemList.map(item => item.name)
+
       SocialShare.shareText("Groceries list:" + list.join(", ").trim())
     }
   }

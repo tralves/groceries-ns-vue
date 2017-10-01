@@ -1,18 +1,25 @@
 import Vue from 'nativescript-vue'
-// const VueRouter = require('vue-router')
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
 Vue.use(VueRouter)
-global.process = { env: {} } // hack! a build process should replace process.env's with static strings.
+Vue.use(Vuex)
 
-import * as platformModule from "tns-core-modules/platform"
+import * as platformModule from 'tns-core-modules/platform'
 import BackendService from '/services/BackendService'
 import Groceries from './components/Groceries/Groceries.vue'
 import Login from './components/Login/Login.vue'
 import './app.css'
 import { setStatusBarColors } from './utils/statusBar'
 
+import storeConf from '/store/store.js'
+
+global.process = { env: { } } // hack! a build process should replace process.env's with static strings.
 const backendService = new BackendService()
 setStatusBarColors()
+
+const store = new Vuex.Store(storeConf);
+
+Vue.prototype.$store = store
 
 const router = new VueRouter({
   routes: [
