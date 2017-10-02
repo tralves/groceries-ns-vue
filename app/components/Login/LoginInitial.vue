@@ -38,11 +38,6 @@ export default {
     color: white;
     horizontal-align: center;
     margin-bottom: 80;
-    font-size: 36;
-    letter-spacing: 0.2;
-
-    font-size: 40;
-    letter-spacing: 0.2;
   }
 
   .initial-button {
@@ -56,6 +51,26 @@ export default {
   .initial-button-label {
     horizontal-align: center;
     font-weight: bold;
+  }
+}
+
+.platform-ios .login {
+
+  .initial-label {
+    font-size: 40;
+    letter-spacing: 0.2;
+  }
+}
+
+.platform-android .login {
+
+  .initial-container {
+    margin-top: 290;
+  }
+
+  .initial-label {
+    font-size: 36;
+    letter-spacing: 0.35;
   }
 }
 

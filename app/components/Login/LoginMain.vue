@@ -188,29 +188,18 @@ export default {
 .login {
 
   .main-container {
+    height: 425;
     margin-left: 30;
     margin-right: 30;
     background-color: white;
-    opacity: 0;
-
-    height: 425;
-    width: 300;
   }
 
   .main-label {
     horizontal-align: center;
     color: black;
-
-    color: #311217;
-    font-size: 32;
-    margin-top: 45;
-    margin-bottom: 52;
-    letter-spacing: 0.2;
   }
 
-
   /* Hide a bunch of things to setup the initial animations */
-
   .form-controls,
   .sign-up-stack {
     opacity: 0;
@@ -231,24 +220,17 @@ export default {
   text-field {
     color: black;
     placeholder-color: #ACA6A7;
+    margin-bottom: 10;
 
-    border-width: 1;
-    border-color: #6E595C;
-    margin-bottom: 20;
-  }
-
-  text-field.light {
-    color: #C4AFB4;
-    placeholder-color: #C4AFB4;
-
-    border-color: #C4AFB4;
+    &.light {
+      color: #C4AFB4;
+      placeholder-color: #C4AFB4;
+    }
   }
 
   .submit-button {
     background-color: #CB1D00;
     color: white;
-
-    height: 40;
     margin-top: 15;
   }
 
@@ -261,15 +243,69 @@ export default {
 
   .sign-up-stack {
     background-color: #311217;
-  }
 
-  .sign-up-stack Label {
-    color: white;
-    horizontal-align: center;
-    font-size: 15;
-
-    height: 48;
+    label {
+      color: white;
+      horizontal-align: center;
+      font-size: 15;
+      height: 48;
+    }
   }
 
 }
+
+.platform-ios .login {
+
+  .main-container {
+    width: 300;
+  }
+
+  .main-label {
+    color: #311217;
+    font-size: 32;
+    margin-top: 45;
+    margin-bottom: 52;
+    letter-spacing: 0.2;
+  }
+
+  text-field {
+    border-width: 1;
+    border-color: #6E595C;
+    margin-bottom: 20;
+
+    &.light {
+      border-color: #C4AFB4;
+    }
+  }
+
+  .submit-button {
+    height: 40;
+  }
+}
+
+.platform-android .login {
+
+  .main-container {
+    width: 275;
+    height: 394;
+  }
+
+  .main-label {
+    font-size: 28;
+    margin-top: 42;
+    margin-bottom: 32;
+    letter-spacing: 0.3;
+  }
+
+  .sign-up-stack label {
+    margin-top: 15;
+    text-transform: uppercase;
+  }
+
+  .forgot-password-label {
+    font-size: 13;
+    text-transform: uppercase;
+  }
+}
+
 </style>

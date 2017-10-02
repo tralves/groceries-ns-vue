@@ -8,7 +8,7 @@
     <login-main ref="loginMain" :visible="state === 'main'"></login-main>
 
     <!-- The fruit logo that appears within the container -->
-    <absolute-layout marginTop="-250" ref="logoContainer" class="logo-container">
+    <absolute-layout marginTop="-260" ref="logoContainer" class="logo-container">
       <image translateY="0" src="res://logo_login" stretch="none"></image>
     </absolute-layout>
 
@@ -16,6 +16,7 @@
 
 </template>
 <script>
+import * as platformModule from 'tns-core-modules/platform'
 import LoginInitial from './LoginInitial.vue'
 import LoginMain from './LoginMain.vue'
 import enums from 'ui/enums'
@@ -36,7 +37,7 @@ export default {
 
       this.$refs.logoContainer.nativeView
         .animate({
-          translate: { x: 0, y: -90 },
+          translate: { x: 0, y: platformModule.isAndroid ? -70 : -90 },
           duration: 500,
           curve: enums.AnimationCurve.easeIn })
         .then(() => {
@@ -73,5 +74,4 @@ export default {
     height: 80;
   }
 }
-
 </style>

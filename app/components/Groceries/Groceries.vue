@@ -197,6 +197,7 @@ export default {
     color: white;
     margin-top: 20;
     padding-top: 12;
+    padding-bottom: 12;
 
     label {
       font-size: 21;
@@ -249,6 +250,7 @@ export default {
 
   .add-bar-recent-container {
     height: 50;
+    min-width: 70;
     padding-left: 10;
     padding-right: 10;
     margin-right: -10;
@@ -257,11 +259,24 @@ export default {
 
   .add-bar-recent-toggle {
     color: #311217;
+    horizontal-align: center;
   }
 
   activity-indicator {
     horizontal-align: center;
     vertical-align: center;
+  }
+}
+
+.platform-android .list-page {
+
+  .action-bar-custom {
+    color: white;
+    margin-top: 32;
+  }
+
+  .add-bar-recent-toggle {
+    text-transform: uppercase;
   }
 }
 </style>
