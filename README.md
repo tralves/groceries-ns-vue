@@ -22,14 +22,27 @@ This project uses:
 1. Install NativeScript tools (see http://docs.nativescript.org/start/quick-setup)
 
 2. Clone this repository:
-```git clone https://github.com/tralves/groceries-ns-vue```
+```
+git clone https://github.com/tralves/groceries-ns-vue
+```
 
-3. Build and run
+3. Install dependencies:
 
 ```
+cd groceries-ns-vue
+npm install
+
+cd groceries-ns-vue/tns
+npm install
+```
+
+3. Build and run:
+
+```
+cd groceries-ns-vue
 rollup -c -w
 
-cd tns
+cd groceries-ns-vue/tns
 tns run android
 # or
 tns run ios
@@ -40,10 +53,11 @@ tns run ios
 In two separate terminals run:
 ```
 # terminal 1
+cd groceries-ns-vue
 rollup -c -w
 
 # terminal 2
-cd tns
+cd groceries-ns-vue/tns
 tns debug android
 # or
 tns debug ios
