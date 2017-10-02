@@ -1,7 +1,7 @@
 import validator from 'email-validator'
 
 export default class{
-    constructor(email, password) {
+    constructor() {
         this.email = ''
         this.password = ''
     }

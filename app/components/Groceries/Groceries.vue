@@ -55,6 +55,7 @@ export default {
   components: {
     GroceryList
   },
+
   data() {
     return {
       isShowingRecent: false,
@@ -63,28 +64,31 @@ export default {
       listLoaded: false
     }
   },
+
   computed: {
     ...mapGetters({
       itemList: 'itemList',
       deletedItemList: 'deletedItemList',
       isLoading: 'isProcessing'
     }),
+
     items: function() {
-      if (this.isShowingRecent) {
-        return this.deletedItemList
-      }
-      return this.itemList
+      // set item lists according to the list mode (using the defined vuex getters)
+      return this.isShowingRecent ? this.deletedItemList : this.itemList
     }
   },
+
   mounted() {
-    console.log('APP ON CREATE')
+    console.log('GROCERIES mounted')
   },
+
   methods: {
     ...mapActions([
       'loadItems',
       'restoreItems',
       'addItem'
     ]),
+
     load() {
       this
         .loadItems()
@@ -96,9 +100,10 @@ export default {
           alert("An error occurred loading your grocery list.");
         })
     },
-      // Prevent the first textfield from receiving focus on Android
-    // See http://stackoverflow.com/questions/5056734/android-force-edittext-to-remove-focus
+
     handleAndroidFocus() {
+      // Prevent the first textfield from receiving focus on Android
+      // See http://stackoverflow.com/questions/5056734/android-force-edittext-to-remove-focus
       const textField = this.$refs.groceryTextField
       const container = this.$refs.container
       if (container.android) {
@@ -131,6 +136,7 @@ export default {
       // Dismiss the keyboard
       textField.dismissSoftInput()
 
+      // adds the item
       this
         .addItem(this.grocery)
         .then(() => {
@@ -144,10 +150,12 @@ export default {
 
     toggleRecent() {
       if (!this.isShowingRecent) {
+        // if toggling to 'recent', just change the state
         this.isShowingRecent = true
         return
       }
 
+      // if toggling back to 'add', restore selected items
       this
         .restoreItems()
         .then(() => {
@@ -178,8 +186,7 @@ export default {
     },
 
     share() {
-      let list = this.itemList.map(item => item.name)
-
+      const list = this.itemList.map(item => item.name)
       SocialShare.shareText("Groceries list:" + list.join(", ").trim())
     }
   }
@@ -203,6 +210,7 @@ export default {
       font-size: 21;
       font-weight: bold;
     }
+
     stack-layout {
       height: 40;
       padding-left: 15;
@@ -217,6 +225,7 @@ export default {
     padding-left: 16;
     padding-right: 16;
     height: 50;
+
     text-field {
       height: 20;
     }
@@ -228,6 +237,7 @@ export default {
     margin-left: -15;
     padding-left: 15;
     padding-right: 13;
+
     image {
       height: 20;
     }
@@ -269,7 +279,6 @@ export default {
 }
 
 .platform-android .list-page {
-
   .action-bar-custom {
     color: white;
     margin-top: 32;

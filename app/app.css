@@ -2,7 +2,7 @@ page {
     font-size: 15;
 }
 
-page.hidden-action-bar.platform-ios {
+page.platform-ios {
     margin-top: -20;
 }
 
@@ -26,4 +26,3 @@ text-field {
 .line-through {
     text-decoration: line-through;
 }
-

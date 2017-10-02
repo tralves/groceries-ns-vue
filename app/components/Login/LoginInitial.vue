@@ -15,11 +15,12 @@ export default {
   },
   methods: {
     login: function() {
+      // fadeout and notify parent element when finished
       this.$refs.initialContainer.nativeView.animate({
         opacity: 0,
         duration: 500
       }).then( () => {
-        console.log('emitting login')
+        console.debug('emitting login')
         this.$emit('login');
       })
     }
@@ -28,8 +29,9 @@ export default {
 </script>
 
 <style lang="scss">
+// vue scoped styles are not working with this rollup config, and
+// that's why we scope with this '.login' class
 .login {
-
   .initial-container {
     margin-top: 250;
   }
@@ -55,7 +57,6 @@ export default {
 }
 
 .platform-ios .login {
-
   .initial-label {
     font-size: 40;
     letter-spacing: 0.2;
@@ -63,7 +64,6 @@ export default {
 }
 
 .platform-android .login {
-
   .initial-container {
     margin-top: 290;
   }

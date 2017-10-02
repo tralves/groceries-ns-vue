@@ -13,9 +13,11 @@ import GroceryItem from './GroceryItem.vue'
 
 export default {
   name: 'grocery-list',
+
   components: {
     GroceryItem
   },
+
   props: {
     row: {
       type: Number,
@@ -29,17 +31,14 @@ export default {
     }
   },
 
-  methods: {
-
-  },
   created() {
-    console.log('GROCERY LIST')
+    console.debug('GROCERY LIST created')
   }
 }
 </script>
 
 <style lang="scss">
-list-view {
+.list-page list-view {
   background-color: transparent;
   opacity: 0;
 

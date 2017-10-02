@@ -1,15 +1,11 @@
 import http from 'tns-core-modules/http'
 import BackendService from './BackendService'
 
-export default class LoginService {
-
-  constructor() {
-    this.backendService = new BackendService()
-  }
+export default class LoginService extends BackendService{
 
   login(user) {
     return http.request({
-      url: this.backendService.apiUrl + "oauth/token",
+      url: this.apiUrl + "oauth/token",
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -20,17 +16,17 @@ export default class LoginService {
         grant_type: "password"
       }),
     })
-    .then(this.backendService.validateCode)
-    .then(this.backendService.getJson)
+    .then(this.validateCode)
+    .then(this.getJson)
     .then(data => {
       console.info('User logged in with token: ' + data.Result.access_token)
-      this.backendService.token = data.Result.access_token
+      this.token = data.Result.access_token
     })
   }
 
   register(user) {
     return http.request({
-      url: this.backendService.apiUrl + "Users",
+      url: this.apiUrl + "Users",
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -41,8 +37,8 @@ export default class LoginService {
         Password: user.password
       }),
     })
-    .then(this.backendService.validateCode)
-    .then(this.backendService.getJson)
+    .then(this.validateCode)
+    .then(this.getJson)
     .then(data => {
       console.info('User registered: ' + data.Result.Id)
     })
@@ -50,7 +46,7 @@ export default class LoginService {
 
   resetPassword(email) {
     return http.request({
-      url: this.backendService.apiUrl + "Users/resetpassword",
+      url: this.apiUrl + "Users/resetpassword",
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -59,15 +55,15 @@ export default class LoginService {
         Username: email,
       }),
     })
-    .then(this.backendService.validateCode)
-    .then(this.backendService.getJson)
+    .then(this.validateCode)
+    .then(this.getJson)
     .then(data => {
       console.info('Reset password for email: ' + data.Result.Result)
     })
   }
 
   logout() {
-    this.backendService.token = ""
+    this.token = ""
   }
 
 }

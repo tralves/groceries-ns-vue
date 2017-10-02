@@ -8,8 +8,8 @@ import * as platformModule from 'tns-core-modules/platform'
 import BackendService from '/services/BackendService'
 import Groceries from './components/Groceries/Groceries.vue'
 import Login from './components/Login/Login.vue'
-import './app.css'
 import { setStatusBarColors } from './utils/statusBar'
+import './app.css'
 
 import storeConf from '/store/store.js'
 
@@ -19,6 +19,8 @@ setStatusBarColors()
 
 const store = new Vuex.Store(storeConf);
 
+// Adding the vuex store to the main vue object does not work. See:
+// https://github.com/rigor789/nativescript-vue/issues/46#issuecomment-331925815
 Vue.prototype.$store = store
 
 const router = new VueRouter({
@@ -39,16 +41,11 @@ const router = new VueRouter({
 
 new Vue({
   router,
-  data() {
-    return {
-      actionBarHidden: true
-    }
-  },
 
   computed: {
     pageClasses: function () {
       return {
-        'hidden-action-bar': this.actionBarHidden,
+        // add top class so we can apply styles to specific platforms
         'platform-ios': platformModule.isIOS,
         'platform-android': platformModule.isAndroid
       }
@@ -69,14 +66,12 @@ new Vue({
   mounted() {
     console.log('MAIN ON MOUNTED')
     console.log(JSON.stringify(platformModule.device))
-    this.actionBarHidden = true
     this.$refs.page.nativeView.page.backgroundSpanUnderStatusBar = this.actionBarHidden
     this.$nextTick(() => {
       this.$refs.page.nativeView.actionBarHidden = this.actionBarHidden
     })
 
     this.$router.beforeEach((to, from, next) => {
-      // show/hide action bar accordingly
       if (to.matched.some(record => record.meta.requiresAuth)) {
         // this route requires auth, check if logged in
         // if not, redirect to login page.

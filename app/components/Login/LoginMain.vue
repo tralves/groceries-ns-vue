@@ -2,6 +2,7 @@
   <stack-layout ref="mainContainer" class="main-container" :visibility="visible?'visible':'collapse'">
     <label class="main-label" text="GROCERIES" :color="isLoggingIn? 'black' : 'white'"></label>
 
+    <!-- form controls -->
     <grid-layout ref="formControls" class="form-controls" rows="auto, auto" translateY="50">
       <text-field
         hint="Email Address"
@@ -27,18 +28,21 @@
       <activity-indicator :busy="isAuthenticating" rowSpan="2"></activity-indicator>
     </grid-layout>
 
+    <!-- login / sign up button -->
     <button
       :text="isLoggingIn ? 'Login' : 'Sign up'"
       :isEnabled="!isAuthenticating"
       class="submit-button"
       @tap="submit()"></button>
 
+    <!-- forgot password button -->
     <label
       class="forgot-password-label"
       text="Forgot password?"
       @tap="forgotPassword()"
       :opacity="isLoggingIn ? 1 : 0"></label>
 
+    <!-- forgot password button -->
     <stack-layout ref="signUpStack" class="sign-up-stack" @tap="toggleDisplay()" translateY="50">
       <label :text="isLoggingIn ? 'Sign up here' : 'Back to login'"></label>
     </stack-layout>
@@ -59,11 +63,11 @@ const loginService = new LoginService()
 
 export default {
   name: 'login-main',
-  components: {
-  },
+
   props: {
     visible: Boolean
   },
+
   data() {
     return {
       isLoggingIn: true,
@@ -71,21 +75,25 @@ export default {
       user: new User()
     }
   },
+
   watch: {
     visible: function(val) {
-      console.log('visible changed to  ' + val)
-      let animations = []
+      // when element turns visible, start animations
+      if (val) {
+        const animations = []
 
-      animations.push({ target: this.$refs.mainContainer.nativeView, opacity: 1, duration: 500 })
+        animations.push({ target: this.$refs.mainContainer.nativeView, opacity: 1, duration: 500 })
 
-      // Slide up the form controls and sign up container.
-      animations.push({ target: this.$refs.signUpStack.nativeView, translate: { x: 0, y: 0 }, opacity: 1, delay: 500, duration: 150 })
-      animations.push({ target: this.$refs.formControls.nativeView, translate: { x: 0, y: 0 }, opacity: 1, delay: 650, duration: 150 })
+        // Slide up the form controls and sign up container.
+        animations.push({ target: this.$refs.signUpStack.nativeView, translate: { x: 0, y: 0 }, opacity: 1, delay: 500, duration: 150 })
+        animations.push({ target: this.$refs.formControls.nativeView, translate: { x: 0, y: 0 }, opacity: 1, delay: 650, duration: 150 })
 
-      // Kick off the animation queue
-      new Animation(animations, false).play()
+        // Kick off the animation queue
+        new Animation(animations, false).play()
+      }
     }
   },
+
   methods: {
     toggleDisplay() {
       this.isLoggingIn = !this.isLoggingIn;
@@ -95,11 +103,13 @@ export default {
           duration: 200
       });
     },
+
     focusPassword() {
       this.$refs.password.nativeView.focus();
     },
+
     submit() {
-      console.log(this.user)
+      console.debug('submit', this.user)
       if (!this.user.isValidEmail()) {
         alert("Enter a valid email address.")
         return;
@@ -112,6 +122,7 @@ export default {
         this.signUp();
       }
     },
+
     login() {
       if (getConnectionType() === connectionType.none) {
         alert("Groceries requires an internet connection to log in.")
@@ -130,6 +141,7 @@ export default {
           this.isAuthenticating = false;
         });
     },
+
     signUp() {
       if (getConnectionType() === connectionType.none) {
         alert("Groceries requires an internet connection to register.")
@@ -153,6 +165,7 @@ export default {
           this.isAuthenticating = false;
         });
     },
+
     forgotPassword() {
       prompt({
         title: "Forgot Password",
@@ -171,22 +184,22 @@ export default {
             })
             .catch((error) => {
               this.isAuthenticating = false
-              console.log('Error resetting password: ' + error)
+              console.debug('Error resetting password: ' + error)
               alert("Unfortunately, an error occurred resetting your password.");
             })
         }
       });
     }
   },
+
   mounted() {
-    console.log('LoginOrSignup mounted')
+    console.debug('LoginOrSignup mounted')
   }
 }
 </script>
 
 <style lang="scss">
 .login {
-
   .main-container {
     height: 425;
     margin-left: 30;
@@ -251,11 +264,9 @@ export default {
       height: 48;
     }
   }
-
 }
 
 .platform-ios .login {
-
   .main-container {
     width: 300;
   }
@@ -284,7 +295,6 @@ export default {
 }
 
 .platform-android .login {
-
   .main-container {
     width: 275;
     height: 394;

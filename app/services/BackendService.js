@@ -2,6 +2,9 @@ import { getString, setString } from 'tns-core-modules/application-settings'
 
 const tokenKey = "token";
 
+/**
+ * Parent service class. Has common configs and methods.
+ */
 export default class BackendService {
   constructor() {
     this.apiUrl = "https://api.everlive.com/v1/GWfRtXi1Lwt4jcqK/"
