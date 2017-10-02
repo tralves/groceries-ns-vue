@@ -13,7 +13,20 @@ const mutations = {
     console.log('UPDATE_ITEM', item)
     let itemToUpdate = state.items.find(i => i.id == item.id)
     Object.assign(itemToUpdate,item)
-  }
+  },
+  [types.DELETE_ITEM](state, item) {
+    console.log('DELETE_ITEM', item)
+    state.items.splice(state.items.findIndex(i => i.id == item.id), 1)
+  },
+
+  [types.ADD_PROCESSING_TASK](state, task) {
+    console.log('ADD_PROCESSING_TASK', task)
+    state.processingTasks.push(task)
+  },
+  [types.REMOVE_PROCESSING_TASK](state, task) {
+    console.log('REMOVE_PROCESSING_TASK', task)
+    state.processingTasks.splice(state.processingTasks.indexOf(task), 1)
+  },
 }
 
 export default mutations;

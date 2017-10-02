@@ -29,7 +29,6 @@
 
     <!-- Row 3: The grocery list -->
     <grocery-list :row="2"
-      @loaded="hideActivityIndicator()"
       :listLoaded="listLoaded"
       :showDeleted="isShowingRecent"
       :items="items"></grocery-list>
@@ -59,7 +58,6 @@ export default {
   data() {
     return {
       isShowingRecent: false,
-      isLoading: false,
       isAndroid: platformModule.isAndroid,
       grocery: "",
       listLoaded: false
@@ -67,8 +65,16 @@ export default {
   },
   computed: {
     ...mapGetters({
-      items: 'itemList'
-    })
+      itemList: 'itemList',
+      deletedItemList: 'deletedItemList',
+      isLoading: 'isProcessing'
+    }),
+    items: function() {
+      if (this.isShowingRecent) {
+        return this.deletedItemList
+      }
+      return this.itemList
+    }
   },
   mounted() {
     console.log('APP ON CREATE')
@@ -76,6 +82,7 @@ export default {
   methods: {
     ...mapActions([
       'loadItems',
+      'restoreItems',
       'addItem'
     ]),
     load() {
@@ -101,9 +108,6 @@ export default {
       }
     },
 
-    showActivityIndicator() { this.isLoading = true; },
-    hideActivityIndicator() { this.isLoading = false; },
-
     add(target) {
       // If showing recent groceries the add button should do nothing.
       if (this.isShowingRecent) {
@@ -127,41 +131,31 @@ export default {
       // Dismiss the keyboard
       textField.dismissSoftInput()
 
-      this.showActivityIndicator()
       this
         .addItem(this.grocery)
         .then(() => {
           this.grocery = "";
-          this.hideActivityIndicator();
         })
         .catch(() => {
             alert("An error occurred while adding an item to your list.");
-            this.hideActivityIndicator();
           }
         )
     },
 
     toggleRecent() {
       if (!this.isShowingRecent) {
-        this.isShowingRecent = true;
-        return;
+        this.isShowingRecent = true
+        return
       }
 
-      // if is showing recent, restore items before going back to the list
-      this.isShowingRecent = false;
-      // this.showActivityIndicator();
-      // restore items???
-      // this.store.restore()
-      //   .subscribe(
-      //   () => {
-      //     this.isShowingRecent = false;
-      //     this.hideActivityIndicator();
-      //   },
-      //   () => {
-      //     alert("An error occurred while adding groceries to your list.");
-      //     this.hideActivityIndicator();
-      //   }
-      //   );
+      this
+        .restoreItems()
+        .then(() => {
+          this.isShowingRecent = false
+        })
+        .catch(() => {
+          alert("An error occurred while adding groceries to your list.");
+        })
     },
 
     showMenu() {

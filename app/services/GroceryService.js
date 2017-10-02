@@ -53,16 +53,20 @@ export default class GroceryService {
   }
 
   update(item) {
-    console.log(item)
+    console.log('putting', item, JSON.stringify({
+      Name: item.name,
+      Done: item.done,
+      Deleted: item.deleted
+    }))
     return http
       .request({
         url: this.backendService.apiUrl + 'Groceries/' + item.id,
         method: 'PUT',
         headers: this.getHeaders(),
         content: JSON.stringify({
-          Name: item.Name,
-          Done: item.Done,
-          Deleted: item.Deleted
+          Name: item.name,
+          Done: item.done,
+          Deleted: item.deleted
         })
       })
       .then(this.backendService.validateCode)
@@ -74,13 +78,56 @@ export default class GroceryService {
       })
   }
 
+  delete(item) {
+    console.log('deleting ', item)
+    return http
+      .request({
+        url: this.backendService.apiUrl + 'Groceries/' + item.id,
+        method: 'DELETE',
+        headers: this.getHeaders()
+      })
+      .then(this.backendService.validateCode)
+      .then(this.backendService.getJson)
+      .then(data => {
+        console.info(data)
+        console.info(`Updated item with id ${item.id}.`)
+        return item
+      })
+  }
+
+  restore(items) {
+    console.log('restoring', items)
+    const itemIndeces = items.map(item => item.id)
+    const headers = this.getHeaders({
+      "X-Everlive-Filter": JSON.stringify({
+        "Id": {
+          "$in": itemIndeces
+        }
+      })})
+
+    return http
+      .request({
+        url: this.backendService.apiUrl + 'Groceries',
+        method: 'PUT',
+        headers: headers,
+        content: JSON.stringify({
+          Deleted: false,
+          Done: false
+        }),
+      })
+      .then(this.backendService.validateCode)
+      .then(this.backendService.getJson)
+      .then(data => {
+        console.info(data)
+        console.info(`Restored items with ids ${itemIndeces}.`)
+      })
+  }
+
   getHeaders(toAppend = {}) {
     return Object.assign({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.backendService.token,
     },
     toAppend)
-
   }
-
 }

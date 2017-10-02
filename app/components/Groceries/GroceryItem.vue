@@ -24,12 +24,12 @@ export default {
   },
   methods: {
     toggleDoneItem() {
-      this.item.done = !this.item.done;
       if (this.deleted) {
+        this.item.done = !this.item.done;
         return;
       }
 
-      this.$store.dispatch('setDoneItem', this.item)
+      this.$store.dispatch('toggleDoneItem', this.item)
         .catch( () => {
           alert("An error occurred managing your grocery list.");
         });

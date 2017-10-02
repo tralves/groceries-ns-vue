@@ -11,7 +11,8 @@ const storeConf = {
         Name: 'asdasdasd',
         Done: true
       }
-    ]
+    ],
+    processingTasks: []
   },
   mutations,
   actions,
