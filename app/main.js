@@ -66,9 +66,9 @@ new Vue({
   mounted() {
     console.log('MAIN ON MOUNTED')
     console.log(JSON.stringify(platformModule.device))
-    this.$refs.page.nativeView.page.backgroundSpanUnderStatusBar = this.actionBarHidden
+    this.$refs.page.nativeView.page.backgroundSpanUnderStatusBar = true
     this.$nextTick(() => {
-      this.$refs.page.nativeView.actionBarHidden = this.actionBarHidden
+      this.$refs.page.nativeView.actionBarHidden = true
     })
 
     this.$router.beforeEach((to, from, next) => {

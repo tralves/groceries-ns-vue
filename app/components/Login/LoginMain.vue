@@ -258,8 +258,10 @@ export default {
     background-color: #311217;
 
     label {
+      width: 100%;
       color: white;
       horizontal-align: center;
+      text-align: center;
       font-size: 15;
       height: 48;
     }

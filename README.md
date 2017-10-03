@@ -17,6 +17,9 @@ This project uses:
 - NativeScript-cli (`tns`) to build/debug in Android and iOS;
 - Rollup for bundling vue, scss and ES6 (see [nativescript-vue-rollup-template](https://github.com/tralves/nativescript-vue-rollup-template));
 
+## Video demo
+
+[![Groceries-vue video demo](https://img.youtube.com/vi/4CdLCR_sYPc/0.jpg)](https://www.youtube.com/watch?v=4CdLCR_sYPc)
 ## Usage
 
 1. Install NativeScript tools (see http://docs.nativescript.org/start/quick-setup)
