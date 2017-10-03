@@ -32,20 +32,20 @@ export default {
   },
   methods: {
     showMainContent: function() {
-      console.debug('showMainContent')
+      console.log('showMainContent')
       this.$refs.logoContainer.nativeView
         .animate({
           translate: { x: 0, y: platformModule.isAndroid ? -70 : -90 },
           duration: 500,
           curve: enums.AnimationCurve.easeIn })
         .then(() => {
-          console.debug('switching from ' + this.state + ' to main')
+          console.log('switching from ' + this.state + ' to main')
           this.state = 'main'
         })
     },
 
     startBackgroundAnimation: function() {
-      console.debug('starting bg animation...')
+      console.log('starting bg animation...')
       this.$refs.background.nativeView.animate({
         scale: { x: 1.0, y: 1.0 },
         duration: 10000
@@ -53,7 +53,7 @@ export default {
     }
   },
   mounted() {
-    console.debug('LOGIN mounted')
+    console.log('LOGIN mounted')
   }
 }
 </script>

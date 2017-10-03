@@ -20,7 +20,7 @@ export default {
         opacity: 0,
         duration: 500
       }).then( () => {
-        console.debug('emitting login')
+        console.log('emitting login')
         this.$emit('login');
       })
     }

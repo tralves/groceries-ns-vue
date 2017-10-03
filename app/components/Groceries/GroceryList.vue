@@ -32,7 +32,7 @@ export default {
   },
 
   created() {
-    console.debug('GROCERY LIST created')
+    console.log('GROCERY LIST created')
   }
 }
 </script>

@@ -109,7 +109,7 @@ export default {
     },
 
     submit() {
-      console.debug('submit', this.user)
+      console.log('submit', this.user)
       if (!this.user.isValidEmail()) {
         alert("Enter a valid email address.")
         return;
@@ -184,7 +184,7 @@ export default {
             })
             .catch((error) => {
               this.isAuthenticating = false
-              console.debug('Error resetting password: ' + error)
+              console.log('Error resetting password: ' + error)
               alert("Unfortunately, an error occurred resetting your password.");
             })
         }
@@ -193,7 +193,7 @@ export default {
   },
 
   mounted() {
-    console.debug('LoginOrSignup mounted')
+    console.log('LoginOrSignup mounted')
   }
 }
 </script>
