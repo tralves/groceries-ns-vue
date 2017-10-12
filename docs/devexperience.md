@@ -4,7 +4,7 @@
 
 A couple of weeks ago I was challenged to build a clone of the [sample Groceries](https://github.com/NativeScript/sample-Groceries) app with [Vue.js](https://vuejs.org/) using the [`nativescript-vue`](https://github.com/rigor789/nativescript-vue) plugin. The original sample Groceries is an app built both in Vanilla JS and Angular, that serves as a code example of a NativeScript app. This demo app is a kind of to-do list app for groceries. It connects to a REST API back-end for login and storage.
 
-My goal was higher than simply transposing from one framework to another. Instead, I wanted to bring as much as possible of the experience of developing a normal web Vue.js app into native development, through NativeScript. This included using .vue Single File Components (SFC), Vuex, vue-router, and all bits of patterns and architecture that Vue.js developers are familiar with.
+The bar was higher than simply transposing from one framework to another. Instead, I wanted to bring as much as possible of the experience of developing a normal web Vue.js app into native development, through NativeScript. This included using .vue Single File Components (SFC), Vuex, vue-router, and all bits of patterns and architecture that Vue.js developers are familiar with.
 
 This is what it ended to look like:
 
