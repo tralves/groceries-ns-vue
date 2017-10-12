@@ -4,7 +4,7 @@
 
 A couple of weeks ago I was challenged to build a clone of the [sample Groceries](https://github.com/NativeScript/sample-Groceries) app with [Vue.js](https://vuejs.org/) using the [`nativescript-vue`](https://github.com/rigor789/nativescript-vue) plugin. The original sample Groceries is an app built both in Vanilla JS and Angular, that serves as a code example of a NativeScript app. This demo app is a kind of to-do list app for groceries. It connects to a REST API back-end for login and storage.
 
-The bar was higher than simply transposing from one framework to another. Instead, I wanted to bring, as much as possible, the experience of developing a normal web Vue.js app into native development, through NativeScript. This included using .vue Single File Components (SFC), Vuex, vue-router, and all bits of patterns and architecture that Vue.js developers are familiar with.
+The bar was higher than simply transposing from one framework to another. Instead, I wanted to bring, as much as possible, the experience of developing a normal web Vue.js app into native development, through NativeScript. This included using .vue Single File Components (SFC), Vuex, vue-router, and the patterns and architecture that Vue.js developers are familiar with.
 
 This is what the app ended looking like:
 
@@ -14,7 +14,7 @@ This is what the app ended looking like:
 
 For this project I started with the [nativescript-vue-rollup-template](https://github.com/tralves/nativescript-vue-rollup-template) because it enables .vue SFC and liveSync. While developing the Groceries app, I also added support for scss, root imports and babel.
 
-The development felt very good in this environment. I just launched `rollup -c -w` and `tns debug ios` in two separate terminals, and each time I saved a file the app was updated in the iOS Simulator automatically. It takes about 20 seconds from the moment I save a file to the moment the app is re-launched in the iOS simulator. It doesn't bother that much because all that happens in the background while we can do other stuff. It is not as fast as normal web development, but felt faster than my last real native development. The experience with Android, on a physical device, is similar to the iOS Simulator.
+Development felt very good in this environment. I just launched `rollup -c -w` and `tns debug ios` in two separate terminals, and each time I saved a file the app was updated in the iOS Simulator automatically. It takes about 20 seconds from the moment I save a file to the moment the app is re-launched in the iOS simulator. It's not too bothersome because all that happens in the background while we can do other stuff. It is not as fast as normal web development, but felt faster than my last real native development. The experience with Android, on a physical device, is similar to the iOS Simulator.
 
 The command `tns debug ios` also opens a safari dev tools window, which allows inspecting the code, debugging and monitoring network requests. Very helpful!
 
