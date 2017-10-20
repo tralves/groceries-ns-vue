@@ -28,7 +28,7 @@ const router = new VueRouter({
     {
       path: '/login',
       component: Login,
-      meta: { hidenActionBar: true }
+      meta: { hiddenActionBar: true }
     },
     {
       path: '/groceries',
