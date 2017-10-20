@@ -5,13 +5,13 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 
 import * as platformModule from 'tns-core-modules/platform'
-import BackendService from '/services/BackendService'
+import BackendService from './services/BackendService'
 import Groceries from './components/Groceries/Groceries.vue'
 import Login from './components/Login/Login.vue'
 import { setStatusBarColors } from './utils/statusBar'
 import './app.css'
 
-import storeConf from '/store/store.js'
+import storeConf from './store/store.js'
 
 global.process = { env: { } } // hack! a build process should replace process.env's with static strings.
 const backendService = new BackendService()
