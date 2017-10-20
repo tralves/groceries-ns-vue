@@ -1,7 +1,7 @@
 <template>
   <list-view :items="items" :row="row" :class="{'visible': listLoaded}"
-    @itemLoading="makeBackgroundTransparent(event)">
-    <template scope="item">
+    @item-loading="makeBackgroundTransparent(event)">
+    <template slot-scope="item">
       <grocery-item :item="item"></grocery-item>
     </template>
   </list-view>

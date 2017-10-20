@@ -3,35 +3,35 @@
     <label class="main-label" text="GROCERIES" :color="isLoggingIn? 'black' : 'white'"></label>
 
     <!-- form controls -->
-    <grid-layout ref="formControls" class="form-controls" rows="auto, auto" translateY="50">
+    <grid-layout ref="formControls" class="form-controls" rows="auto, auto" translate-y="50">
       <text-field
         hint="Email Address"
-        keyboardType="email"
-        returnKeyType="next"
-        @returnPress="focusPassword()"
+        keyboard-type="email"
+        return-key-type="next"
+        @return-press="focusPassword()"
         v-model="user.email"
-        :isEnabled="!isAuthenticating"
+        :is-enabled="!isAuthenticating"
         autocorrect="false"
-        autocapitalizationType="none"
+        autocapitalization-type="none"
         :class="{ light: !isLoggingIn}"
         row="0"></text-field>
       <text-field ref="password"
         hint="Password"
         secure="true"
-        returnKeyType="done"
-        @returnPress="submit()"
+        return-key-type="done"
+        @return-press="submit()"
         v-model="user.password"
-        :isEnabled="!isAuthenticating"
+        :is-enabled="!isAuthenticating"
         :class="{ light: !isLoggingIn }"
         row="1"></text-field>
 
-      <activity-indicator :busy="isAuthenticating" rowSpan="2"></activity-indicator>
+      <activity-indicator :busy="isAuthenticating" row-span="2"></activity-indicator>
     </grid-layout>
 
     <!-- login / sign up button -->
     <button
       :text="isLoggingIn ? 'Login' : 'Sign up'"
-      :isEnabled="!isAuthenticating"
+      :is-enabled="!isAuthenticating"
       class="submit-button"
       @tap="submit()"></button>
 
@@ -43,7 +43,7 @@
       :opacity="isLoggingIn ? 1 : 0"></label>
 
     <!-- forgot password button -->
-    <stack-layout ref="signUpStack" class="sign-up-stack" @tap="toggleDisplay()" translateY="50">
+    <stack-layout ref="signUpStack" class="sign-up-stack" @tap="toggleDisplay()" translate-y="50">
       <label :text="isLoggingIn ? 'Sign up here' : 'Back to login'"></label>
     </stack-layout>
   </stack-layout>
