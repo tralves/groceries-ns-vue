@@ -37,7 +37,7 @@ became
 <StackLayout ref="signUpStack"
       class="sign-up-stack"
       @tap="toggleDisplay()"
-      translateY="50">
+      translate-y="50">
       <Label
         :text="isLoggingIn ? 'Sign up here' : 'Back to login'"></Label>
 </StackLayout>

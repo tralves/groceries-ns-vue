@@ -1,15 +1,15 @@
 <template>
   <grid-layout class='login'>
     <!-- background -->
-    <grid-layout ref="background" scaleX="1.4" scaleY="1.4" class="background" @loaded="startBackgroundAnimation()"></grid-layout>
+    <grid-layout ref="background" scale-X="1.4" scale-Y="1.4" class="background" @loaded="startBackgroundAnimation()"></grid-layout>
 
     <!-- initial login button -->
     <login-initial ref="loginInitial" @login="showMainContent()" :visible="state === 'initial'"></login-initial>
     <login-main ref="loginMain" :visible="state === 'main'"></login-main>
 
     <!-- The fruit logo -->
-    <absolute-layout marginTop="-260" ref="logoContainer" class="logo-container">
-      <image translateY="0" src="res://logo_login" stretch="none"></image>
+    <absolute-layout margin-top="-260" ref="logoContainer" class="logo-container">
+      <image translate-y="0" src="res://logo_login" stretch="none"></image>
     </absolute-layout>
 
   </grid-layout>

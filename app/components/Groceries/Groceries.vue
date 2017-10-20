@@ -12,7 +12,7 @@
 
     <!-- Row 2: The text field to add groceries, and recent button -->
     <grid-layout row="1" columns="auto, *, auto" class="add-bar"
-      :backgroundColor="isShowingRecent ? '#BBC169' : '#CB1D00'" >
+      :background-color="isShowingRecent ? '#BBC169' : '#CB1D00'" >
       <stack-layout col="0" class="add-bar-image-container"  @tap="add('button')" orientation="vertical">
         <image :src="isShowingRecent ? 'res://recent' : 'res://add'"></image>
       </stack-layout>
@@ -20,7 +20,7 @@
       <text-field ref='groceryTextField' col="1" v-model="grocery"
         @loaded="handleAndroidFocus()"
         :hint="isAndroid ? 'ADD A GROCERY' : 'Add a grocery'"
-        returnKeyType="done" v-else @returnPress="add('textfield')"></text-field>
+        return-key-type="done" v-else @return-press="add('textfield')"></text-field>
 
       <stack-layout col="2" class="add-bar-recent-container" @tap="toggleRecent()">
         <label class="add-bar-recent-toggle" :text="isShowingRecent ? 'Done' : 'Recent'"></label>
@@ -29,8 +29,8 @@
 
     <!-- Row 3: The grocery list -->
     <grocery-list :row="2"
-      :listLoaded="listLoaded"
-      :showDeleted="isShowingRecent"
+      :list-loaded="listLoaded"
+      :show-deleted="isShowingRecent"
       :items="items"></grocery-list>
 
     <activity-indicator :busy="isLoading" row="2"></activity-indicator>
