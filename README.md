@@ -1,5 +1,7 @@
 # Groceries Vue
 
+[![Built With NativeScript-Vue](https://img.shields.io/badge/built_with-nativescript--vue-42B883.svg)](https://nativescript-vue.org/#/)
+
 Groceries Vue is an app for managing grocery lists.
 
 Groceries Vue  is also a clone of [sample-Groceries](https://github.com/NativeScript/sample-Groceries)
