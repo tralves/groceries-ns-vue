@@ -21,8 +21,12 @@
     }
   },
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "ns-bundle": "ns-bundle",
+    "publish-ios-bundle": "npm run ns-bundle --ios --publish-app",
+    "start-android-bundle": "npm run ns-bundle --android --run-app",
+    "start-ios-bundle": "npm run ns-bundle --ios --run-app",
+    "build-android-bundle": "npm run ns-bundle --android --build-app",
+    "build-ios-bundle": "npm run ns-bundle --ios --build-app"
   },
   "dependencies": {
     "email-validator": "^1.1.1",
@@ -35,18 +39,29 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "babel-traverse": "6.26.0",
-    "babel-types": "6.26.0",
-    "babylon": "6.18.0",
+    "babel-traverse": "6.24.1",
+    "babel-types": "6.24.1",
+    "babylon": "6.16.1",
+    "copy-webpack-plugin": "~4.0.1",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "~2.1.0",
     "lazy": "1.0.11",
-    "rollup": "^0.50.0",
-    "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-cleanup": "^1.0.1",
-    "rollup-plugin-root-import": "^0.2.2",
-    "rollup-plugin-scss": "^0.3.0",
-    "rollup-plugin-vue": "^2.4.2"
+    "merge-files-webpack-plugin": "^1.1.2",
+    "nativescript-css-loader": "~0.26.0",
+    "nativescript-dev-android-snapshot": "^0.*.*",
+    "nativescript-dev-webpack": "^0.6.3",
+    "node-sass": "^4.5.3",
+    "raw-loader": "~0.5.1",
+    "resolve-url-loader": "~2.0.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "vue-loader": "^12.2.1",
+    "vue-style-loader": "^3.0.1",
+    "vue-template-compiler": "2.5.2",
+    "webpack": "~2.6.1",
+    "webpack-sources": "~1.0.1"
   }
 }
