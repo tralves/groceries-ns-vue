@@ -43,9 +43,9 @@
 import * as platformModule from 'tns-core-modules/platform'
 import { action } from 'ui/dialogs'
 import * as SocialShare from 'nativescript-social-share'
-import LoginService from '/services/LoginService'
+import LoginService from '@/services/LoginService'
 import GroceryList from './GroceryList.vue'
-import alert from '/utils/alert'
+import alert from '@/utils/alert'
 import { mapGetters } from 'vuex'
 import { mapActions } from 'vuex'
 

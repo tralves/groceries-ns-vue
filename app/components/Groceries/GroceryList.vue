@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import alert from '/utils/alert'
+import alert from '@/utils/alert'
 import GroceryItem from './GroceryItem.vue'
 
 export default {

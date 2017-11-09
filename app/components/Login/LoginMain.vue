@@ -55,9 +55,9 @@ import { prompt } from "ui/dialogs"
 import { Color } from 'tns-core-modules/color'
 import { connectionType, getConnectionType } from 'tns-core-modules/connectivity'
 
-import User from '/models/User'
-import LoginService from '/services/LoginService'
-import alert from '/utils/alert'
+import User from '@/models/User'
+import LoginService from '@/services/LoginService'
+import alert from '@/utils/alert'
 
 const loginService = new LoginService()
 
