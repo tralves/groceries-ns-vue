@@ -83,10 +83,6 @@ function getPlatform(env) {
 function getRules() {
   return [
     {
-      test: /^res:\/\//,
-      loader: 'ignore-loader'
-    },
-    {
       test: /\.js$/,
       loader: 'babel-loader',
       include: [resolve('app')]
@@ -121,7 +117,10 @@ function getRules() {
       exclude: new RegExp(mainSheet),
       loader: extractCSS.extract({
         fallback: 'style-loader',
-        use: 'css-loader'
+        use: {
+          loader: 'css-loader',
+          options: { url: false }
+        }
       })
 
     },
@@ -129,7 +128,13 @@ function getRules() {
     {
       test: /\.s[a|c]ss$/,
       loader: extractCSS.extract({
-        use: ['css-loader', 'sass-loader'],
+        use: [
+          {
+            loader: 'css-loader',
+            options: { url: false }
+          },
+          'sass-loader'
+        ],
         fallback: 'vue-style-loader'
       })
 
@@ -142,7 +147,13 @@ function getRules() {
         loaders: {
           css: extractCSS.extract("css-loader"),
           scss: extractCSS.extract({
-            use: ['css-loader', 'sass-loader'],
+            use: [
+              {
+                loader: 'css-loader',
+                options: { url: false }
+              },
+              'sass-loader'
+            ],
             fallback: 'vue-style-loader'
           })
         }
