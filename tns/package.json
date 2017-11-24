@@ -40,6 +40,7 @@
     "lazy": "1.0.11",
     "rollup": "^0.50.0",
     "rollup-plugin-cleanup": "^1.0.1",
-    "rollup-plugin-vue": "^2.4.2"
+    "rollup-plugin-vue": "^2.4.2",
+    "vue-template-compiler": "^2.5.2"
   }
 }
