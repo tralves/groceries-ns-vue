@@ -47,6 +47,7 @@
     "rollup-plugin-cleanup": "^1.0.1",
     "rollup-plugin-root-import": "^0.2.2",
     "rollup-plugin-scss": "^0.3.0",
-    "rollup-plugin-vue": "^2.4.2"
+    "rollup-plugin-vue": "^2.4.2",
+    "vue-template-compiler": "^2.5.2"
   }
 }
