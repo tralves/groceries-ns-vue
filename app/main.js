@@ -65,9 +65,11 @@ new Vue({
 
   mounted() {
     console.log('MAIN ON MOUNTED')
-    console.log(JSON.stringify(platformModule.device))
+    console.log(JSON.stringify(platformModule.isAndroid))
     this.$refs.page.nativeView.page.backgroundSpanUnderStatusBar = true
     this.$nextTick(() => {
+      debugger;
+      console.log('HEEEEERE!!!!!!!');
       this.$refs.page.nativeView.actionBarHidden = true
     })
 
