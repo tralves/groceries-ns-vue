@@ -50,7 +50,8 @@ module.exports = env => {
       extensions,
 
       alias: {
-          '@': resolve('app')
+        '@': join(__dirname, 'app'),
+        '~': join(__dirname, 'tns', 'app')
       },
       // Resolve {N} system modules from tns-core-modules
       modules: [
@@ -142,7 +143,7 @@ function getRules() {
     // .vue single file component support
     {
       test: /\.vue$/,
-      loader: 'vue-loader',
+      loader: 'ns-vue-loader',
       options: {
         loaders: {
           css: extractCSS.extract("css-loader"),

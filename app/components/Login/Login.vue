@@ -1,4 +1,5 @@
 <template>
+<page ref="page" :class="pageClasses">
   <grid-layout class='login'>
     <!-- background -->
     <grid-layout ref="background" scale-X="1.4" scale-Y="1.4" class="background" @loaded="startBackgroundAnimation()"></grid-layout>
@@ -13,6 +14,7 @@
     </absolute-layout>
 
   </grid-layout>
+</page>
 </template>
 <script>
 import * as platformModule from 'tns-core-modules/platform'
@@ -28,6 +30,15 @@ export default {
   data() {
     return {
       state: 'initial'
+    }
+  },
+  computed: {
+    pageClasses: function () {
+      return {
+        // add top class so we can apply styles to specific platforms
+        'platform-ios': platformModule.isIOS,
+        'platform-android': platformModule.isAndroid
+      }
     }
   },
   methods: {
