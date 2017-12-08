@@ -1,10 +1,10 @@
 <template>
-  <list-view :items="items" :row="row" :class="{'visible': listLoaded}"
+  <ListView :items="items" :row="row" :class="{'visible': listLoaded}"
     @item-loading="makeBackgroundTransparent(event)">
     <template slot-scope="item">
-      <grocery-item :item="item"></grocery-item>
+      <GroceryItem :item="item"></GroceryItem>
     </template>
-  </list-view>
+  </ListView>
 </template>
 
 <script>
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss">
-.list-page list-view {
+.list-page ListView {
   background-color: transparent;
   opacity: 0;
 

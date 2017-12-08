@@ -1,26 +1,26 @@
 <template>
-<page ref="page" :class="pageClasses">
-  <grid-layout class='login'>
+<Page ref="page" :class="pageClasses" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
+  <GridLayout class='login'>
     <!-- background -->
-    <grid-layout ref="background" scale-X="1.4" scale-Y="1.4" class="background" @loaded="startBackgroundAnimation()"></grid-layout>
+    <GridLayout ref="background" scaleX="1.4" scaleY="1.4" class="background" @loaded="startBackgroundAnimation()"></GridLayout>
 
     <!-- initial login button -->
-    <login-initial ref="loginInitial" @login="showMainContent()" :visible="state === 'initial'"></login-initial>
-    <login-main ref="loginMain" :visible="state === 'main'"></login-main>
+    <LoginInitial ref="loginInitial" @login="showMainContent()" :visible="state === 'initial'"></LoginInitial>
+    <LoginMain ref="loginMain" :visible="state === 'main'"></LoginMain>
 
     <!-- The fruit logo -->
-    <absolute-layout margin-top="-260" ref="logoContainer" class="logo-container">
-      <image translate-y="0" src="res://logo_login" stretch="none"></image>
-    </absolute-layout>
+    <AbsoluteLayout marginTop="-260" ref="logoContainer" class="logo-container">
+      <Image translateY="0" src="res://logo_login" stretch="none"></Image>
+    </AbsoluteLayout>
 
-  </grid-layout>
-</page>
+  </GridLayout>
+</Page>
 </template>
 <script>
 import * as platformModule from 'tns-core-modules/platform'
 import LoginInitial from './LoginInitial.vue'
 import LoginMain from './LoginMain.vue'
-import enums from 'ui/enums'
+import * as enums from 'ui/enums'
 
 export default {
   components: {

@@ -17,7 +17,7 @@ This project uses:
 - NativeScript animation;
 - NativeScript http lib to connect to a backend service;
 - NativeScript-cli (`tns`) to build/debug in Android and iOS;
-- Rollup for bundling vue, scss and ES6 (see [nativescript-vue-rollup-template](https://github.com/tralves/nativescript-vue-rollup-template));
+- Webpack for bundling vue, scss and ES6 (see [nativescript-vue-webpack-template](https://github.com/tralves/nativescript-vue-webpack-template));
 
 ## Video demo
 
@@ -45,7 +45,7 @@ npm install
 
 ```
 cd groceries-ns-vue
-rollup -c -w
+webpack --watch --env.tns --env.android
 
 cd groceries-ns-vue/tns
 tns run android
@@ -59,7 +59,7 @@ In two separate terminals run:
 ```
 # terminal 1
 cd groceries-ns-vue
-rollup -c -w
+webpack --watch --env.tns --env.android
 
 # terminal 2
 cd groceries-ns-vue/tns
