@@ -1,52 +1,52 @@
 <template>
-  <stack-layout ref="mainContainer" class="main-container" :visibility="visible?'visible':'collapse'">
-    <label class="main-label" text="GROCERIES" :color="isLoggingIn? 'black' : 'white'"></label>
+  <StackLayout ref="mainContainer" class="main-container" :visibility="visible?'visible':'collapse'">
+    <Label class="main-label" text="GROCERIES" :color="isLoggingIn? 'black' : 'white'"></Label>
 
     <!-- form controls -->
-    <grid-layout ref="formControls" class="form-controls" rows="auto, auto" translate-y="50">
-      <text-field
+    <GridLayout ref="formControls" class="form-controls" rows="auto, auto" translateY="50">
+      <TextField
         hint="Email Address"
-        keyboard-type="email"
-        return-key-type="next"
-        @return-press="focusPassword()"
+        keyboardType="email"
+        returnKeyType="next"
+        @returnPress="focusPassword()"
         v-model="user.email"
-        :is-enabled="!isAuthenticating"
+        :iEnabled="!isAuthenticating"
         autocorrect="false"
-        autocapitalization-type="none"
+        autocapitalizationType="none"
         :class="{ light: !isLoggingIn}"
-        row="0"></text-field>
-      <text-field ref="password"
+        row="0"></TextField>
+      <TextField ref="password"
         hint="Password"
         secure="true"
-        return-key-type="done"
-        @return-press="submit()"
+        returnKeyType="done"
+        @returnPress="submit()"
         v-model="user.password"
-        :is-enabled="!isAuthenticating"
+        :isEnabled="!isAuthenticating"
         :class="{ light: !isLoggingIn }"
-        row="1"></text-field>
+        row="1"></TextField>
 
-      <activity-indicator :busy="isAuthenticating" row-span="2"></activity-indicator>
-    </grid-layout>
+      <ActivityIndicator :busy="isAuthenticating" rowSpan="2"></ActivityIndicator>
+    </GridLayout>
 
     <!-- login / sign up button -->
-    <button
+    <Button
       :text="isLoggingIn ? 'Login' : 'Sign up'"
-      :is-enabled="!isAuthenticating"
+      :isEnabled="!isAuthenticating"
       class="submit-button"
-      @tap="submit()"></button>
+      @tap="submit()"></Button>
 
     <!-- forgot password button -->
-    <label
+    <Label
       class="forgot-password-label"
       text="Forgot password?"
       @tap="forgotPassword()"
-      :opacity="isLoggingIn ? 1 : 0"></label>
+      :opacity="isLoggingIn ? 1 : 0"></Label>
 
     <!-- forgot password button -->
-    <stack-layout ref="signUpStack" class="sign-up-stack" @tap="toggleDisplay()" translate-y="50">
-      <label :text="isLoggingIn ? 'Sign up here' : 'Back to login'"></label>
-    </stack-layout>
-  </stack-layout>
+    <StackLayout ref="signUpStack" class="sign-up-stack" @tap="toggleDisplay()" translateY="50">
+      <Label :text="isLoggingIn ? 'Sign up here' : 'Back to login'"></Label>
+    </StackLayout>
+  </StackLayout>
 </template>
 
 <script>
@@ -55,9 +55,9 @@ import { prompt } from "ui/dialogs"
 import { Color } from 'tns-core-modules/color'
 import { connectionType, getConnectionType } from 'tns-core-modules/connectivity'
 
-import User from '/models/User'
-import LoginService from '/services/LoginService'
-import alert from '/utils/alert'
+import User from '@/models/User'
+import LoginService from '@/services/LoginService'
+import alert from '@/utils/alert'
 
 const loginService = new LoginService()
 
@@ -218,19 +218,19 @@ export default {
     opacity: 0;
   }
 
-  image {
+  Image {
     margin-top: 5;
     margin-bottom: 20;
   }
 
-  button,
-  text-field {
+  Button,
+  TextField {
     margin-left: 16;
     margin-right: 16;
     margin-bottom: 10;
   }
 
-  text-field {
+  TextField {
     color: black;
     placeholder-color: #ACA6A7;
     margin-bottom: 10;
@@ -281,7 +281,7 @@ export default {
     letter-spacing: 0.2;
   }
 
-  text-field {
+  TextField {
     border-width: 1;
     border-color: #6E595C;
     margin-bottom: 20;

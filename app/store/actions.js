@@ -1,5 +1,5 @@
 import * as types from './mutation-types'
-import GroceryService from '/services/GroceryService'
+import GroceryService from '@/services/GroceryService'
 
 const groceryService = new GroceryService()
 

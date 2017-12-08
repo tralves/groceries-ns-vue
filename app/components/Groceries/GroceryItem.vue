@@ -1,16 +1,16 @@
 <template>
-    <grid-layout columns="*, auto" class="item-container" :opacity="item.done ? '0.8' : '1'">
+    <GridLayout columns="*, auto" class="item-container" :opacity="item.done ? '0.8' : '1'">
       <!-- Wrap in containers for bigger tap targets -->
-      <grid-layout columns="auto, *" col="0" orientation="horizontal" class="tap-target" @tap="toggleDoneItem()">
-        <image col="0" :src="imageSource(item)" class="check-box"></image>
-        <label col="1" :text="item.name" :class="{'line-through': item.done && !item.deleted}"></label>
-      </grid-layout>
-      <grid-layout col="1" class="delete-container" @tap="deleteItem()">
-        <stack-layout>
-          <image src="res://delete"></image>
-        </stack-layout>
-      </grid-layout>
-    </grid-layout>
+      <GridLayout columns="auto, *" col="0" orientation="horizontal" class="tap-target" @tap="toggleDoneItem()">
+        <Image col="0" :src="imageSource(item)" class="check-box"></Image>
+        <Label col="1" :text="item.name" :class="{'line-through': item.done && !item.deleted}"></Label>
+      </GridLayout>
+      <GridLayout col="1" class="delete-container" @tap="deleteItem()">
+        <StackLayout>
+          <Image src="res://delete"></Image>
+        </StackLayout>
+      </GridLayout>
+    </GridLayout>
 </template>
 
 <script>
@@ -85,13 +85,12 @@ export default {
     image {
       height: 20;
     }
-    stack-layout {
+    StackLayout {
       padding: 5;
     }
   }
 
 }
-
 
 @keyframes show {
   from {

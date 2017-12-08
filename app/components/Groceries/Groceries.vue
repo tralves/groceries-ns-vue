@@ -1,51 +1,51 @@
 <template>
-  <grid-layout ref='container' rows="auto, auto, *" class="list-page" @loaded="load()">
+<Page ref="page" :class="pageClasses" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
+  <GridLayout ref='container' rows="auto, auto, *" class="list-page" @loaded="load()">
     <!-- Row 1: The custom action bar -->
-    <grid-layout row="0" columns="44, *, auto" class="action-bar-custom">
-      <label col="1" text="Groceries"></label>
+    <GridLayout row="0" columns="44, *, auto" class="action-bar-custom">
+      <Label col="1" text="Groceries"></Label>
 
-      <!-- Wrap the image in a stack-layout to give it a bigger tap target -->
-      <stack-layout col="2" @tap="showMenu()" class='menu-button-container'>
-        <image src="res://menu" stretch="none"></image>
-      </stack-layout>
-    </grid-layout>
+      <!-- Wrap the image in a StackLayout to give it a bigger tap target -->
+      <StackLayout col="2" @tap="showMenu()" class='menu-button-container'>
+        <Image src="res://menu" stretch="none"></Image>
+      </StackLayout>
+    </GridLayout>
 
     <!-- Row 2: The text field to add groceries, and recent button -->
-    <grid-layout row="1" columns="auto, *, auto" class="add-bar"
-      :background-color="isShowingRecent ? '#BBC169' : '#CB1D00'" >
-      <stack-layout col="0" class="add-bar-image-container"  @tap="add('button')" orientation="vertical">
-        <image :src="isShowingRecent ? 'res://recent' : 'res://add'"></image>
-      </stack-layout>
-      <label col="1" text="Recent items" v-if="isShowingRecent" class="add-bar-recent-label"></label>
-      <text-field ref='groceryTextField' col="1" v-model="grocery"
+    <GridLayout row="1" columns="auto, *, auto" class="add-bar"
+      :backgroundColor="isShowingRecent ? '#BBC169' : '#CB1D00'" >
+      <StackLayout col="0" class="add-bar-image-container"  @tap="add('button')" orientation="vertical">
+        <Image :src="isShowingRecent ? 'res://recent' : 'res://add'"></Image>
+      </StackLayout>
+      <Label col="1" text="Recent items" v-if="isShowingRecent" class="add-bar-recent-label"></Label>
+      <TextField ref='groceryTextField' col="1" v-model="grocery"
         @loaded="handleAndroidFocus()"
         :hint="isAndroid ? 'ADD A GROCERY' : 'Add a grocery'"
-        return-key-type="done" v-else @return-press="add('textfield')"></text-field>
+        returnKeyType="done" v-else @returnPress="add('textfield')"></TextField>
 
-      <stack-layout col="2" class="add-bar-recent-container" @tap="toggleRecent()">
-        <label class="add-bar-recent-toggle" :text="isShowingRecent ? 'Done' : 'Recent'"></label>
-      </stack-layout>
-    </grid-layout>
+      <StackLayout col="2" class="add-bar-recent-container" @tap="toggleRecent()">
+        <Label class="add-bar-recent-toggle" :text="isShowingRecent ? 'Done' : 'Recent'"></Label>
+      </StackLayout>
+    </GridLayout>
 
     <!-- Row 3: The grocery list -->
-    <grocery-list :row="2"
-      :list-loaded="listLoaded"
-      :show-deleted="isShowingRecent"
-      :items="items"></grocery-list>
+    <GroceryList row="2"
+      :listLoaded="listLoaded"
+      :showDeleted="isShowingRecent"
+      :items="items"></GroceryList>
 
-    <activity-indicator :busy="isLoading" row="2"></activity-indicator>
-
-  </grid-layout>
-
+    <ActivityIndicator :busy="isLoading" row="2"></ActivityIndicator>
+  </GridLayout>
+</Page>
 </template>
 
 <script>
 import * as platformModule from 'tns-core-modules/platform'
 import { action } from 'ui/dialogs'
 import * as SocialShare from 'nativescript-social-share'
-import LoginService from '/services/LoginService'
+import LoginService from '@/services/LoginService'
 import GroceryList from './GroceryList.vue'
-import alert from '/utils/alert'
+import alert from '@/utils/alert'
 import { mapGetters } from 'vuex'
 import { mapActions } from 'vuex'
 
@@ -75,6 +75,14 @@ export default {
     items: function() {
       // set item lists according to the list mode (using the defined vuex getters)
       return this.isShowingRecent ? this.deletedItemList : this.itemList
+    },
+
+    pageClasses: function () {
+      return {
+        // add top class so we can apply styles to specific platforms
+        'platform-ios': platformModule.isIOS,
+        'platform-android': platformModule.isAndroid
+      }
     }
   },
 
@@ -206,12 +214,12 @@ export default {
     padding-top: 12;
     padding-bottom: 12;
 
-    label {
+    Label {
       font-size: 21;
       font-weight: bold;
     }
 
-    stack-layout {
+    StackLayout {
       height: 40;
       padding-left: 15;
       padding-right: 15;
@@ -226,7 +234,7 @@ export default {
     padding-right: 16;
     height: 50;
 
-    text-field {
+    TextField {
       height: 20;
     }
   }
@@ -243,7 +251,7 @@ export default {
     }
   }
 
-  text-field {
+  TextField {
     color: white;
     placeholder-color: white;
     background-color: transparent;

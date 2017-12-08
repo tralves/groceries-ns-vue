@@ -7,8 +7,5 @@
       }
     ],
     "stage-2"
-  ],
-  "plugins": [
-    "external-helpers"
   ]
 }

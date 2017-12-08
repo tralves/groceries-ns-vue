@@ -54,9 +54,7 @@ new Vue({
 
   template: `
     <page ref="page" :class="pageClasses">
-      <stack-layout>
-        <router-view></router-view>
-      </stack-layout>
+      <router-view></router-view>
     </page>
     `,
 
@@ -65,12 +63,6 @@ new Vue({
 
   mounted() {
     console.log('MAIN ON MOUNTED')
-    console.log(JSON.stringify(platformModule.device))
-    this.$refs.page.nativeView.page.backgroundSpanUnderStatusBar = true
-    this.$nextTick(() => {
-      this.$refs.page.nativeView.actionBarHidden = true
-    })
-
     this.$router.beforeEach((to, from, next) => {
       if (to.matched.some(record => record.meta.requiresAuth)) {
         // this route requires auth, check if logged in

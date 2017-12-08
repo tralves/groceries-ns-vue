@@ -1,10 +1,10 @@
 <template>
-  <stack-layout ref="initialContainer" class="initial-container" :visibility="visible?'visible':'collapse'">
-    <label text="GROCERIES" class="initial-label"></label>
-    <stack-layout @tap="login()" class="initial-button">
-      <label text="Login" class="initial-button-label"></label>
-    </stack-layout>
-  </stack-layout>
+  <StackLayout ref="initialContainer" class="initial-container" :visibility="visible?'visible':'collapse'">
+    <Label text="GROCERIES" class="initial-label"></Label>
+    <StackLayout @tap="login()" class="initial-button">
+      <Label text="Login" class="initial-button-label"></Label>
+    </StackLayout>
+  </StackLayout>
 </template>
 
 <script>

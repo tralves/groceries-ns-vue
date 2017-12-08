@@ -3,7 +3,7 @@
     "**/.git": true,
     "**/.svn": true,
     "**/platforms": true,
-    "**/tns": true,
+    "**/tns": false,
     "**/CVS": true,
     "**/.DS_Store": true
   },
