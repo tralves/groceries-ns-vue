@@ -27,13 +27,13 @@ This project uses:
 1. Install NativeScript tools (see http://docs.nativescript.org/start/quick-setup)
 
 2. Clone this repository:
-```
+```bash
 git clone https://github.com/tralves/groceries-ns-vue
 ```
 
 3. Install dependencies:
 
-```
+```bash
 cd groceries-ns-vue
 npm install
 
@@ -43,7 +43,7 @@ npm install
 
 3. Build and run:
 
-```
+```bash
 cd groceries-ns-vue
 webpack --watch --env.tns --env.android
 
@@ -56,7 +56,7 @@ tns run ios
 4. Development mode
 
 In two separate terminals run:
-```
+```bash
 # terminal 1
 cd groceries-ns-vue
 webpack --watch --env.tns --env.android
