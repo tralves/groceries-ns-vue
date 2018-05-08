@@ -1,0 +1,21 @@
+{
+  "name": "groceries-ns-vue",
+  "description": "A NativeScript-built iOS and Android app for managing grocery lists",
+  "license": "MIT",
+  "readme": "Groceries",
+  "nativescript": {
+    "id": "org.nativescript.groceriesvue"
+  },
+  "dependencies": {
+    "nativescript-theme-core": "^1.0.4",
+    "nativescript-vue": "^1.3.1",
+    "tns-core-modules": "~4.0.0",
+    "nativescript-social-share": "^1.5.0"
+  },
+  "devDependencies": {
+    "babel-traverse": "6.26.0",
+    "babel-types": "6.26.0",
+    "babylon": "6.18.0",
+    "lazy": "1.0.11"
+  }
+}

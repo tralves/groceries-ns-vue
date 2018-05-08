@@ -4,11 +4,10 @@
 
 !app/samples/*.js
 
-/platforms
-/hooks
-/lib
-/node_modules
+# JetBrains project files
+.idea
 
-/tns/platforms
-/tns/node_modules
-/tns/app/
+# NPM
+node_modules
+
+/dist
