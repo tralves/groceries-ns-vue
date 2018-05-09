@@ -14,15 +14,18 @@ export default class BackendService {
   }
 
   isLoggedIn() {
+    console.log('GETTING TOKEN LOGGED IN: ' + getString(tokenKey))
     return !!getString(tokenKey);
   }
 
   get token() {
+    console.log('GETTING TOKEN: ' + getString(tokenKey))
     return getString(tokenKey);
   }
 
   set token(newToken) {
     setString(tokenKey, newToken);
+    console.log('TOKEN SET TO: ' + newToken)
   }
 
   validateCode(response) {

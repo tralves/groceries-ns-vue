@@ -55,6 +55,8 @@ import { prompt } from "ui/dialogs"
 import { Color } from 'tns-core-modules/color'
 import { connectionType, getConnectionType } from 'tns-core-modules/connectivity'
 
+import Groceries from '@/components/Groceries/Groceries'
+import Counter from '@/components/Counter'
 import User from '@/models/User'
 import LoginService from '@/services/LoginService'
 import alert from '@/utils/alert'
@@ -133,7 +135,9 @@ export default {
         .login(this.user)
         .then(() => {
           this.isAuthenticating = false;
-          this.$router.push('/groceries')
+          console.log('navigating to groceries')
+          this.$navigateTo(Groceries)
+          console.log('navigated to groceries')
         })
         .catch((error) => {
           console.error(error)

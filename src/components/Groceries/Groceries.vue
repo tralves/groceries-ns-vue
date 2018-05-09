@@ -45,6 +45,7 @@ import { action } from 'ui/dialogs'
 import * as SocialShare from 'nativescript-social-share'
 import LoginService from '@/services/LoginService'
 import GroceryList from './GroceryList.vue'
+import Login from '@/components/Login/Login'
 import alert from '@/utils/alert'
 import { mapGetters } from 'vuex'
 import { mapActions } from 'vuex'
@@ -157,21 +158,7 @@ export default {
     },
 
     toggleRecent() {
-      if (!this.isShowingRecent) {
-        // if toggling to 'recent', just change the state
-        this.isShowingRecent = true
-        return
-      }
-
-      // if toggling back to 'add', restore selected items
-      this
-        .restoreItems()
-        .then(() => {
-          this.isShowingRecent = false
-        })
-        .catch(() => {
-          alert("An error occurred while adding groceries to your list.");
-        })
+      this.isShowingRecent = !this.isShowingRecent
     },
 
     showMenu() {
@@ -190,7 +177,7 @@ export default {
 
     logout: function() {
       loginService.logout()
-      this.$router.push('/login')
+      this.$navigateTo(Login)
     },
 
     share() {

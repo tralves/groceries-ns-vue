@@ -1,9 +1,9 @@
 <template>
   <ListView :items="items" :row="row" :class="{'visible': listLoaded}"
     @item-loading="makeBackgroundTransparent(event)">
-    <template slot-scope="item">
+    <v-template>
       <GroceryItem :item="item"></GroceryItem>
-    </template>
+    </v-template>
   </ListView>
 </template>
 

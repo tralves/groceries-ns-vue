@@ -1,8 +1,16 @@
+import Vue from 'nativescript-vue';
+import Vuex from 'vuex';
+
+import counter from './modules/counter';
 import mutations from './mutations.js'
 import * as actions from './actions.js'
 import * as getters from './getters'
 
-const storeConf = {
+Vue.use(Vuex);
+
+const debug = process.env.NODE_ENV !== 'production';
+
+const store = new Vuex.Store({
   state: {
     // array of grocery items
     items: [],
@@ -12,7 +20,10 @@ const storeConf = {
   },
   mutations,
   actions,
-  getters
-}
+  getters,
+  strict: debug,
+});
 
-export default storeConf;
+Vue.prototype.$store = store;
+
+module.exports = store;

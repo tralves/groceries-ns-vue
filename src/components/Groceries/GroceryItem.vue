@@ -24,15 +24,18 @@ export default {
   },
   methods: {
     toggleDoneItem() {
-      if (this.deleted) {
-        this.item.done = !this.item.done;
-        return;
-      }
-
-      this.$store.dispatch('toggleDoneItem', this.item)
+      if (this.item.deleted) {
+        this.$store.dispatch('toggleDeleteItem', this.item)
         .catch( () => {
           alert("An error occurred managing your grocery list.");
         });
+      }
+      else {
+        this.$store.dispatch('toggleDoneItem', this.item)
+          .catch( () => {
+            alert("An error occurred managing your grocery list.");
+          });
+      }
     },
 
     deleteItem() {
@@ -44,7 +47,7 @@ export default {
 
     imageSource(grocery) {
       if (grocery.deleted) {
-        return grocery.done ? "res://selected" : "res://nonselected";
+        return "res://add";
       }
       return grocery.done ? "res://checked" : "res://unchecked";
     }

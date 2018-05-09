@@ -27,9 +27,9 @@ export default class LoginService extends BackendService {
       method: "POST",
       headers: this.getCommonHeaders(),
       content: JSON.stringify({
-        Username: user.email,
-        Email: user.email,
-        Password: user.password
+        username: user.email,
+        email: user.email,
+        password: user.password
       }),
     })
     .then(this.validateCode)
@@ -62,5 +62,4 @@ export default class LoginService extends BackendService {
       "Authorization": this.appUserHeader,
     }
   }
-
 }

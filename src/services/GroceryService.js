@@ -5,18 +5,18 @@ export default class GroceryService extends BackendService {
 
   load() {
     return http.request({
-      url: this.apiUrl + 'Groceries',
+      url: this.baseUrl + "appdata/" + this.appKey + "/Groceries?sort=" + encodeURIComponent("{\"_kmd.lmt\": -1}"),
       method: 'GET',
-      headers: this.getHeaders({ 'X-Everlive-Sort': JSON.stringify({ ModifiedAt: -1 }) }),
+      headers: this.getHeaders(),
     })
     .then(this.validateCode)
     .then(this.getJson)
       .then(data => {
         console.info(data);
-        console.info(`Received ${data.Result.length} items from the backend.`)
-        return data.Result.map(item => {
+        console.info(`Received ${data.length} items from the backend.`)
+        return data.map(item => {
           return {
-            id: item.Id,
+            id: item._id,
             name: item.Name,
             done: item.Done || false,
             deleted: item.Deleted || false
@@ -28,7 +28,7 @@ export default class GroceryService extends BackendService {
   add(itemName) {
     return http
       .request({
-        url: this.apiUrl + 'Groceries',
+        url: this.baseUrl + "appdata/" + this.appKey + "/Groceries",
         method: 'POST',
         headers: this.getHeaders(),
         content: JSON.stringify({
@@ -38,9 +38,9 @@ export default class GroceryService extends BackendService {
       .then(this.validateCode)
       .then(this.getJson)
       .then(data => {
-        console.info(`Added item with id ${data.Result.Id}.`)
+        console.info(`Added item with id ${data._id}.`)
         return {
-          id: data.Result.Id,
+          id: data._id,
           name: itemName,
           done: false,
           deleted: false
@@ -56,7 +56,7 @@ export default class GroceryService extends BackendService {
     }))
     return http
       .request({
-        url: this.apiUrl + 'Groceries/' + item.id,
+        url: this.baseUrl + "appdata/" + this.appKey + "/Groceries/" + item.id,
         method: 'PUT',
         headers: this.getHeaders(),
         content: JSON.stringify({
@@ -78,7 +78,7 @@ export default class GroceryService extends BackendService {
     console.log('deleting ', item)
     return http
       .request({
-        url: this.apiUrl + 'Groceries/' + item.id,
+        url: this.baseUrl + "appdata/" + this.appKey + "/Groceries/" + item.id,
         method: 'DELETE',
         headers: this.getHeaders()
       })
@@ -91,38 +91,10 @@ export default class GroceryService extends BackendService {
       })
   }
 
-  restore(items) {
-    console.log('restoring', items)
-    const itemIndeces = items.map(item => item.id)
-    const headers = this.getHeaders({
-      "X-Everlive-Filter": JSON.stringify({
-        "Id": {
-          "$in": itemIndeces
-        }
-      })})
-
-    return http
-      .request({
-        url: this.apiUrl + 'Groceries',
-        method: 'PUT',
-        headers: headers,
-        content: JSON.stringify({
-          Deleted: false,
-          Done: false
-        }),
-      })
-      .then(this.validateCode)
-      .then(this.getJson)
-      .then(data => {
-        console.info(data)
-        console.info(`Restored items with ids ${itemIndeces}.`)
-      })
-  }
-
   getHeaders(toAppend = {}) {
     return Object.assign({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.token,
+      'Authorization': 'Kinvey ' + this.token,
     },
     toAppend)
   }
