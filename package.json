@@ -1,70 +1,50 @@
 {
-  "name": "Groceries",
-  "version": "1.0.0",
+  "name": "groceries-ns-vue",
+  "version": "1.1.0",
   "description": "A NativeScript-built iOS and Android app for managing grocery lists",
+  "author": "Tiago Alves <tralves@gmail.com>",
   "license": "MIT",
-  "author": "Tiago Alves <tralves@gmail.com> (https: //www.tiagoalves.co/)",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tralves/groceries-ns-vue.git"
-  },
-  "bugs": {
-    "url": "https://github.com/tralves/groceries-ns-vue/issues"
-  },
-  "nativescript": {
-    "id": "org.nativescript.groceriesvue",
-    "tns-android": {
-      "version": "3.2.0"
-    },
-    "tns-ios": {
-      "version": "3.1.0"
-    }
-  },
   "scripts": {
-    "ns-bundle": "ns-bundle",
-    "publish-ios-bundle": "npm run ns-bundle --ios --publish-app",
-    "start-android-bundle": "npm run ns-bundle --android --run-app",
-    "start-ios-bundle": "npm run ns-bundle --ios --run-app",
-    "build-android-bundle": "npm run ns-bundle --android --build-app",
-    "build-ios-bundle": "npm run ns-bundle --ios --build-app"
+    "build": "webpack --env.tnsAction build",
+    "build:android": "npm run build -- --env.android",
+    "build:ios": "npm run build -- --env.ios",
+    "debug": "webpack --watch --env.tnsAction debug",
+    "debug:android": "npm run debug -- --env.android",
+    "debug:ios": "npm run debug -- --env.ios",
+    "watch": "webpack --watch --env.tnsAction run",
+    "watch:android": "npm run watch -- --env.android",
+    "watch:ios": "npm run watch -- --env.ios",
+    "clean": "rimraf dist"
   },
   "dependencies": {
-    "email-validator": "^1.1.1",
+    "email-validator": "^2.0.3",
     "nativescript-social-share": "^1.5.0",
     "nativescript-theme-core": "^1.0.4",
-    "nativescript-vue": "^0.3.0",
-    "tns-core-modules": "3.2.0",
-    "vue-router": "^2.7.0",
-    "vuex": "^2.4.1",
-    "vuex-router-sync": "^4.3.2"
+    "nativescript-vue": "^1.3.1",
+    "tns-core-modules": "~4.0.0",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-traverse": "6.24.1",
-    "babel-types": "6.24.1",
-    "babylon": "6.16.1",
-    "copy-webpack-plugin": "~4.0.1",
-    "css-loader": "^0.28.4",
-    "extract-text-webpack-plugin": "~2.1.0",
-    "ignore-loader": "^0.1.2",
-    "lazy": "1.0.11",
-    "merge-files-webpack-plugin": "^1.1.2",
-    "nativescript-css-loader": "~0.26.0",
-    "nativescript-dev-android-snapshot": "^0.*.*",
-    "nativescript-dev-webpack": "^0.6.3",
-    "node-sass": "^4.5.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "fs-extra": "^5.0.0",
+    "nativescript-vue-externals": "^0.1.2",
+    "nativescript-vue-loader": "^0.1.5",
+    "nativescript-vue-target": "^0.1.0",
+    "nativescript-vue-template-compiler": "^1.3.1",
+    "node-sass": "^4.7.2",
     "ns-vue-loader": "^0.1.2",
-    "raw-loader": "~0.5.1",
-    "resolve-url-loader": "~2.0.2",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.18.2",
-    "vue-loader": "^12.2.1",
-    "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.5.3",
-    "webpack": "~2.6.1",
-    "webpack-sources": "~1.0.1"
+    "optimize-css-assets-webpack-plugin": "^3.2.0",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^6.0.7",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^3.11.0",
+    "webpack-synchronizable-shell-plugin": "0.0.7",
+    "winston-color": "^1.0.0"
   }
 }

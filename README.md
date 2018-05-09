@@ -12,58 +12,37 @@ This project uses:
 
 - Vue.js!
 - Vuex;
-- Vue-router;
 - NativeScript components;
 - NativeScript animation;
 - NativeScript http lib to connect to a backend service;
-- NativeScript-cli (`tns`) to build/debug in Android and iOS;
-- Webpack for bundling vue, scss and ES6 (see [nativescript-vue-webpack-template](https://github.com/tralves/nativescript-vue-webpack-template));
+- NativeScript `vue-cli-template` (see [nativescript-vue/vue-cli-template/](https://github.com/nativescript-vue/vue-cli-template/))
 
 ## Video demo
 
 [![Groceries-vue video demo](https://img.youtube.com/vi/4CdLCR_sYPc/0.jpg)](https://www.youtube.com/watch?v=4CdLCR_sYPc)
+
 ## Usage
 
-1. Install NativeScript tools (see http://docs.nativescript.org/start/quick-setup)
-
-2. Clone this repository:
-```bash
-git clone https://github.com/tralves/groceries-ns-vue
-```
-
-3. Install dependencies:
-
-```bash
-cd groceries-ns-vue
+``` bash
+# Install dependencies
 npm install
 
-cd groceries-ns-vue/tns
-npm install
+# Build for production
+npm run build
+npm run build:<platform>
+
+# Build, watch for changes and debug the application
+npm run debug
+npm run debug:<platform>
+
+# Build, watch for changes and run the application
+npm run watch
+npm run watch:<platform>
+
+# Clean the NativeScript application instance (i.e. rm -rf dist)
+npm run clean
 ```
 
-3. Build and run:
+> When invoking the various npm scripts, omitting the platform will attempt to launch `tns` for both platforms, which will only work in a properly configured OSX environment.
 
-```bash
-cd groceries-ns-vue
-webpack --watch --env.tns --env.android
-
-cd groceries-ns-vue/tns
-tns run android
-# or
-tns run ios
-```
-
-4. Development mode
-
-In two separate terminals run:
-```bash
-# terminal 1
-cd groceries-ns-vue
-webpack --watch --env.tns --env.android
-
-# terminal 2
-cd groceries-ns-vue/tns
-tns debug android
-# or
-tns debug ios
-```
+For detailed instructions, see https://github.com/nativescript-vue/vue-cli-template

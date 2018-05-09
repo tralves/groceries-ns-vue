@@ -1,11 +1,6 @@
 {
   "presets": [
-    [
-      "es2015",
-      {
-        "modules": false
-      }
-    ],
-    "stage-2"
-  ]
+    ["env", { "cacheDirectory": true }]
+  ],
+  "plugins": ["transform-object-rest-spread"]
 }

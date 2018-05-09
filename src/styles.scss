@@ -1,0 +1,36 @@
+// NativeScript core theme
+// @see https://docs.nativescript.org/ui/theme
+@import '~nativescript-theme-core/scss/skins/light/index';
+@import '~nativescript-theme-core/scss/index';
+
+// Global SCSS styling
+// @see https://docs.nativescript.org/ui/styling
+
+page {
+    font-size: 15;
+}
+
+page.platform-ios {
+    margin-top: -20;
+}
+
+.list-page {
+    background-image: url("res://bg_inner");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+action-bar {
+    background-color: black;
+    color: white;
+}
+
+text-field {
+    padding: 10;
+    font-size: 13;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
