@@ -56,7 +56,6 @@ import { Color } from 'tns-core-modules/color'
 import { connectionType, getConnectionType } from 'tns-core-modules/connectivity'
 
 import Groceries from '@/components/Groceries/Groceries'
-import Counter from '@/components/Counter'
 import User from '@/models/User'
 import LoginService from '@/services/LoginService'
 import alert from '@/utils/alert'

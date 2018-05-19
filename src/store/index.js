@@ -1,7 +1,6 @@
 import Vue from 'nativescript-vue';
 import Vuex from 'vuex';
 
-import counter from './modules/counter';
 import mutations from './mutations.js'
 import * as actions from './actions.js'
 import * as getters from './getters'
