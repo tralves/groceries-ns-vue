@@ -3,7 +3,6 @@ import Vue from 'nativescript-vue';
 import BackendService from './services/BackendService'
 import Login from './components/Login/Login'
 import Groceries from './components/Groceries/Groceries'
-import Counter from './components/Counter'
 
 import store from './store';
 
