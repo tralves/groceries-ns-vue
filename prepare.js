@@ -3,13 +3,10 @@ const path = require('path');
 const {execSync} = require('child_process');
 const winston = require('winston-color');
 
-const distPath = path.resolve(__dirname, './dist');
-const tplPath = path.resolve(__dirname, './template');
+function copyNativeScriptPlugins (tplPath) {
+  const tplPackage = require('./template-native/package.json');
+  const appPackage = require('./package.json');
 
-const appPackage = require('./package.json');
-const tplPackage = require('./template/package.json');
-
-function copyNativeScriptPlugins () {
   winston.info('Copying NativeScript plugins to template dependencies...');
   const plugins = Object.keys(appPackage.dependencies)
     .filter(key => key.indexOf('nativescript-') !== -1)
@@ -19,16 +16,24 @@ function copyNativeScriptPlugins () {
     }, {});
   Object.assign(tplPackage.dependencies, plugins);
   fs.writeFileSync(tplPath + '/package.json', JSON.stringify(tplPackage, null, 2));
+  winston.info(`Done!`);
 }
 
-function updateDistFromTemplate () {
-  winston.info('Preparing NativeScript application from template...');
+function updateDistFromTemplate (distPath, tplPath, build) {
+  winston.info(`Preparing ${build} application from template...`);
   fs.ensureDirSync(distPath);
   fs.copySync(tplPath, distPath, {overwrite: false});
-  execSync('npm i', {cwd: 'dist'});
+  execSync("npm i", { cwd: distPath });
+  winston.info(`Done!`);
 }
 
-module.exports = () => {
-  copyNativeScriptPlugins();
-  updateDistFromTemplate();
+module.exports = (build) => {
+  const distPath = path.resolve(__dirname, `./dist-${build}`);
+  const tplPath = path.resolve(__dirname, `./template-${build}`);
+
+  if (build === 'native') {
+    copyNativeScriptPlugins(tplPath);
+  }
+
+  updateDistFromTemplate(distPath, tplPath, build);
 };

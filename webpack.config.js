@@ -8,11 +8,28 @@ const WebpackSynchronizableShellPlugin = require('webpack-synchronizable-shell-p
 const NativeScriptVueExternals = require('nativescript-vue-externals');
 const NativeScriptVueTarget = require('nativescript-vue-target');
 
-// Prepare NativeScript application from template (if necessary)
-require('./prepare')();
+// Determine platform(s) and action from webpack env arguments
+module.exports = env => {
+
+  const action = (!env || !env.tnsAction) ? 'build' : env.tnsAction;
+
+  if (!env || (!env.android && !env.ios && !env.web)) {
+    return [config('android'), config('ios', action)];
+  }
+
+  return env.android && config('android', action)
+    || env.ios && config('ios', action)
+    || env.web && config('web', action)
+    || {};
+};
 
 // Generate platform-specific webpack configuration
-const config = (platform, launchArgs) => {
+function config(platform, action) {
+
+  const build = getBuildType(platform);
+
+  // Prepare NativeScript application from template (if necessary)
+  require('./prepare')(build);
 
   winston.info(`Bundling application for ${platform}...`);
 
@@ -21,7 +38,10 @@ const config = (platform, launchArgs) => {
     use: [
       {
         loader: 'css-loader',
-        options: {url: false},
+        options: {
+          url: false,
+          sourceMap: action === 'debug',
+        },
       },
     ],
   });
@@ -32,6 +52,7 @@ const config = (platform, launchArgs) => {
         options: {
           url: false,
           includePaths: [path.resolve(__dirname, 'node_modules')],
+          sourceMap: action === 'debug',
         },
       },
       'sass-loader',
@@ -40,14 +61,15 @@ const config = (platform, launchArgs) => {
 
   return {
 
-    target: NativeScriptVueTarget,
+    target: build === 'native' ? NativeScriptVueTarget : 'web',
 
-    entry: path.resolve(__dirname, './src/main.js'),
+    entry: path.resolve(__dirname, `./src/main.${build}.js`),
 
     output: {
-      path: path.resolve(__dirname, './dist/app'),
+      path: path.resolve(__dirname, `./dist-${build}/app`),
       filename: `app.${platform}.js`,
     },
+
 
     module: {
       rules: [
@@ -68,7 +90,7 @@ const config = (platform, launchArgs) => {
 
         {
           test: /\.vue$/,
-          loader: 'ns-vue-loader',
+          loader: platformIsNative(platform) ? 'ns-vue-loader' : 'vue-loader',
           options: {
             loaders: {
               css: cssLoader,
@@ -84,24 +106,19 @@ const config = (platform, launchArgs) => {
         'node_modules/tns-core-modules',
         'node_modules',
       ],
-      extensions: [
-        `.${platform}.css`,
-        '.css',
-        `.${platform}.scss`,
-        '.scss',
-        `.${platform}.js`,
-        '.js',
-        `.${platform}.vue`,
-        '.vue',
-      ],
-      alias: {
-        '@': path.resolve(__dirname, 'src'),
-      },
+      extensions: getExtensions(platform),
     },
 
-    externals: NativeScriptVueExternals,
+    externals: platformIsNative(platform) ? NativeScriptVueExternals : {},
 
     plugins: [
+
+      new webpack.DefinePlugin({
+        'process.build': {
+          'build': build,
+          'platform': platform
+        }
+      }),
 
       // Extract CSS to separate file
       new ExtractTextPlugin({filename: `app.${platform}.css`}),
@@ -109,12 +126,7 @@ const config = (platform, launchArgs) => {
       // Optimize CSS output
       new OptimizeCssAssetsPlugin({
         cssProcessor: require('cssnano'),
-        cssProcessorOptions: {
-          discardComments: {
-            removeAll: true
-          },
-          normalizeUrl: false
-        },
+        cssProcessorOptions: {discardComments: {removeAll: true}},
         canPrint: false,
       }),
 
@@ -124,7 +136,7 @@ const config = (platform, launchArgs) => {
         output: {comments: false},
       }),
 
-      // Copy src/assets/**/* to dist/
+      // Copy src/assets/**/* to dist-native/
       new CopyWebpackPlugin([
         {from: 'assets', context: 'src'},
       ]),
@@ -133,7 +145,7 @@ const config = (platform, launchArgs) => {
       new WebpackSynchronizableShellPlugin({
         onBuildEnd: {
           scripts: [
-            ... launchArgs ? [`node launch.js ${launchArgs}`] : [],
+            ... action && platformIsNative(platform) ? [`node launch.js ${platform} ${action}`] : [],
           ],
           blocking: false,
         },
@@ -149,19 +161,25 @@ const config = (platform, launchArgs) => {
       'setImmediate': false,
       'fs': 'empty',
     },
-
   };
 };
 
-// Determine platform(s) and action from webpack env arguments
-module.exports = env => {
-  const action = (!env || !env.tnsAction) ? 'build' : env.tnsAction;
+// Resolve platform-specific modules like module.android.js
+function getExtensions(platform) {
 
-  if (!env || (!env.android && !env.ios)) {
-    return [config('android'), config('ios', action)];
-  }
+  return ['js', 'css', 'scss', 'vue']
+    .reduce((exts, ext) => {
+      exts.push(`.${platform}.${ext}`)
+      if (platformIsNative(platform)) exts.push(`.native.${ext}`)
+      exts.push(`.${ext}`)
+	    return exts
+    }, [])
+}
 
-  return env.android && config('android', `${action} android`)
-    || env.ios && config('ios', `${action} ios`)
-    || {};
-};
+function platformIsNative(platform) {
+  return ['ios', 'android'].includes(platform);
+}
+
+function getBuildType(platform) {
+  return platformIsNative(platform) ? 'native' : 'web';
+}
