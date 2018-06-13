@@ -11,3 +11,5 @@
 node_modules
 
 /dist
+/dist-native
+/dist-web

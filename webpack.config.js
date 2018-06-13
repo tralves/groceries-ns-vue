@@ -107,6 +107,9 @@ function config(platform, action) {
         'node_modules',
       ],
       extensions: getExtensions(platform),
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
     },
 
     externals: platformIsNative(platform) ? NativeScriptVueExternals : {},
@@ -126,7 +129,12 @@ function config(platform, action) {
       // Optimize CSS output
       new OptimizeCssAssetsPlugin({
         cssProcessor: require('cssnano'),
-        cssProcessorOptions: {discardComments: {removeAll: true}},
+        cssProcessorOptions: {
+          discardComments: {
+            removeAll: true
+          },
+          normalizeUrl: false
+        },
         canPrint: false,
       }),
 

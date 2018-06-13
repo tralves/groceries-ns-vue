@@ -1,16 +1,24 @@
 import Vue from 'nativescript-vue';
 
-import HelloWorld from './components/HelloWorld';
+import BackendService from './services/BackendService'
+import Login from './components/Login/Login'
+import Groceries from './components/Groceries/Groceries'
 
+import store from './store';
 
-import './styles';
+import './styles.scss';
+const backendService = new BackendService()
 
 // Uncommment the following to see NativeScript-Vue output logs
 //Vue.config.silent = false;
 
 new Vue({
 
-  render: h => h(HelloWorld),
+  render: h => {
+    console.log("BackendService:", backendService.isLoggedIn())
+    return h(backendService.isLoggedIn() ? Groceries : Login)
+  },
 
+  store
 
 }).$start();
