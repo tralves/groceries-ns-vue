@@ -6,7 +6,7 @@ import Groceries from './components/Groceries/Groceries'
 
 import store from './store';
 
-import './styles.scss';
+import './styles';
 const backendService = new BackendService()
 
 // Uncommment the following to see NativeScript-Vue output logs

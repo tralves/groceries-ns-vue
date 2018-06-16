@@ -41,8 +41,12 @@ function config(platform, action) {
         options: {
           url: false,
           sourceMap: action === 'debug',
+          importLoaders: 1,
         },
       },
+      {
+        loader: 'postcss-loader'
+      }
     ],
   });
   const scssLoader = ExtractTextPlugin.extract({
@@ -53,7 +57,11 @@ function config(platform, action) {
           url: false,
           includePaths: [path.resolve(__dirname, 'node_modules')],
           sourceMap: action === 'debug',
+          importLoaders: 1,
         },
+      },
+      {
+        loader: 'postcss-loader'
       },
       'sass-loader',
     ],

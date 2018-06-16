@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-import HelloWorld from './components/HelloWorld';
+import Login from './components/Login/Login';
 
 
 import './styles';
@@ -10,5 +10,5 @@ import './styles';
 
 new Vue({
   el: '#app',
-  render: h => h(HelloWorld),
+  render: h => h(Login),
 });
