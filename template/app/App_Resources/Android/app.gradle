@@ -5,22 +5,22 @@
 //	compile 'com.android.support:recyclerview-v7:+'
 //}
 
-android {  
-  defaultConfig {  
+android {
+  defaultConfig {
     generatedDensities = []
-    applicationId = "org.nativescript.groceries" 
-    
+    applicationId = "org.nativescript.groceriesvue"
+
     //override supported platforms
     // ndk {
     //       abiFilters.clear()
     //   		abiFilters "armeabi-v7a"
  		// }
-  
-  }  
-  aaptOptions {  
-    additionalParameters "--no-version-vectors"  
-  }  
-} 
+
+  }
+  aaptOptions {
+    additionalParameters "--no-version-vectors"
+  }
+}
 
 def settingsGradlePath = "$projectDir/../../app/App_Resources/Android/settings.gradle";
 def settingsGradleFile = new File(settingsGradlePath);
