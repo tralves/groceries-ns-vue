@@ -15,7 +15,7 @@ This project uses:
 - NativeScript components;
 - NativeScript animation;
 - NativeScript http lib to connect to a backend service;
-- NativeScript `vue-cli-template` (see [nativescript-vue/vue-cli-template/](https://github.com/nativescript-vue/vue-cli-template/))
+- NativeScript `nativescript-vue-cli-template` (see [jiraiya972/nativescript-vue-cli-template/](https://github.com/jiraiya972/nativescript-vue-cli-template/))
 
 ## Video demo
 
@@ -28,21 +28,12 @@ This project uses:
 npm install
 
 # Build for production
-npm run build
-npm run build:<platform>
+tns build <platform> --bundle
 
 # Build, watch for changes and debug the application
-npm run debug
-npm run debug:<platform>
+tns debug <platform> --bundle
 
 # Build, watch for changes and run the application
-npm run watch
-npm run watch:<platform>
+tns run <platform> --bundle
 
-# Clean the NativeScript application instance (i.e. rm -rf dist)
-npm run clean
 ```
-
-> When invoking the various npm scripts, omitting the platform will attempt to launch `tns` for both platforms, which will only work in a properly configured OSX environment.
-
-For detailed instructions, see https://github.com/nativescript-vue/vue-cli-template
