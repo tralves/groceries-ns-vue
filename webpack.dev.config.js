@@ -17,7 +17,7 @@ const devWebpackConfig = merge(baseWebpackConfig({'web':true}), {
   // devtool: true,
 
   output: {
-    publicPath: './'
+    publicPath: '/'
   },
 
   // these devServer options should be customized in /config/index.js

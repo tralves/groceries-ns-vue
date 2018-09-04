@@ -74,7 +74,7 @@ function config(platform, action) {
     entry: path.resolve(__dirname, `./src/main.${build}.js`),
 
     output: {
-      path: path.resolve(__dirname, `./dist-${build}/app`),
+      path: path.resolve(__dirname, `./dist-${build}`),
       filename: `app.${platform}.js`,
     },
 
