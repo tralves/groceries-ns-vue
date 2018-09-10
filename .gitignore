@@ -10,4 +10,6 @@
 # NPM
 node_modules
 
-/dist
+# nativescript build
+hooks
+platforms
