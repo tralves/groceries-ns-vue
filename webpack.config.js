@@ -38,13 +38,16 @@ module.exports = env => {
         // the nsconfig.json configuration file
         // when bundling with `tns run android|ios --bundle`.
         appPath = "app",
-        appResourcesPath = "app/App_Resources",
+            appResourcesPath = "app/App_Resources",
 
-        // You can provide the following flags when running 'tns run android|ios'
-        snapshot, // --env.snapshot
-        uglify, // --env.uglify
-        report, // --env.report
+            // You can provide the following flags when running 'tns run android|ios'
+            snapshot, // --env.snapshot
+            production, // --env.production
+            report, // --env.report
+            hmr, // --env.hmr
     } = env;
+
+    const mode = production ? "production" : "development"
 
     const appFullPath = resolve(projectRoot, appPath);
     const appResourcesFullPath = resolve(projectRoot, appResourcesPath);
@@ -54,7 +57,7 @@ module.exports = env => {
     console.log(`Bundling application for entryPath ${entryPath}...`);
 
     const config = {
-        mode: uglify ? "production" : "development",
+        mode: mode,
         context: appFullPath,
         watchOptions: {
             ignored: [
@@ -87,6 +90,7 @@ module.exports = env => {
             alias: {
                 '~': appFullPath,
                 '@': appFullPath,
+                'vue': 'nativescript-vue'
             },
             // don't resolve symlinks to symlinked modules
             symlinks: false,
@@ -118,15 +122,9 @@ module.exports = env => {
                         },
                         enforce: true,
                     },
-                    styles: {
-                        name: 'styles',
-                        test: /\.css$/,
-                        chunks: 'all',
-                        enforce: true,
-                    },
                 },
             },
-            minimize: Boolean(uglify),
+            minimize: Boolean(production),
             minimizer: [
                 new UglifyJsPlugin({
                     uglifyOptions: {
@@ -147,57 +145,66 @@ module.exports = env => {
         },
         module: {
             rules: [{
-                test: new RegExp(entryPath),
-                use: [
-                    // Require all Android app components
-                    platform === "android" && {
-                        loader: "nativescript-dev-webpack/android-app-components-loader",
-                        options: { modules: appComponents },
-                    },
-
-                    {
-                        loader: "nativescript-dev-webpack/bundle-config-loader",
-                        options: {
-                            registerPages: true, // applicable only for non-angular apps
-                            loadCss: !snapshot, // load the application css if in debug mode
+                    test: new RegExp(entryPath),
+                    use: [
+                        // Require all Android app components
+                        platform === "android" && {
+                            loader: "nativescript-dev-webpack/android-app-components-loader",
+                            options: { modules: appComponents },
                         },
-                    },
-                ].filter(loader => Boolean(loader)),
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    { loader: "css-loader", options: { minimize: false, url: false } },
-                ],
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    { loader: "css-loader", options: { minimize: false, url: false } },
-                    "sass-loader",
-                ],
-            },
-            {
-                test: /\.vue$/,
-                loader: "vue-loader",
-                options: {
-                    compiler: NsVueTemplateCompiler,
+
+                        {
+                            loader: "nativescript-dev-webpack/bundle-config-loader",
+                            options: {
+                                registerPages: true, // applicable only for non-angular apps
+                                loadCss: !snapshot, // load the application css if in debug mode
+                            },
+                        },
+                    ].filter(loader => Boolean(loader)),
                 },
-            },
+                {
+                    test: /\.css$/,
+                    use: [
+                        'nativescript-dev-webpack/style-hot-loader',
+                        'css-hot-loader',
+                        MiniCssExtractPlugin.loader,
+                        { loader: "css-loader", options: { minimize: false, url: false } },
+                    ],
+                },
+                {
+                    test: /\.scss$/,
+                    use: [
+                        'nativescript-dev-webpack/style-hot-loader',
+                        'css-hot-loader',
+                        MiniCssExtractPlugin.loader,
+                        { loader: "css-loader", options: { minimize: false, url: false } },
+                        "sass-loader",
+                    ],
+                },
+                {
+                    test: /\.js$/,
+                    loader: 'babel-loader',
+                },
+                {
+                    test: /\.vue$/,
+                    loader: "vue-loader",
+                    options: {
+                        compiler: NsVueTemplateCompiler,
+                    },
+                },
             ],
         },
         plugins: [
             // ... Vue Loader plugin omitted
             new MiniCssExtractPlugin({
-                filename: `app.${platform}.css`,
+                filename: `app.css`,
             }),
             // make sure to include the plugin!
             new VueLoaderPlugin(),
             // Define useful constants like TNS_WEBPACK
             new webpack.DefinePlugin({
                 "global.TNS_WEBPACK": "true",
+                "TNS_ENV": JSON.stringify(mode)
             }),
             // Remove all files from the out dir.
             new CleanWebpackPlugin([`${dist}/**/*`]),
@@ -210,8 +217,8 @@ module.exports = env => {
             // Copy assets to out dir. Add your own globs as needed.
             new CopyWebpackPlugin([
                 { from: "fonts/**" },
-                { from: "**/*.jpg" },
-                { from: "**/*.png" },
+                { from: "**/*.+(jpg|png)" },
+                { from: "assets/**/*" },
             ], { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }),
             // Generate a bundle starter script and activate it in package.json
             new nsWebpack.GenerateBundleStarterPlugin([
@@ -250,6 +257,10 @@ module.exports = env => {
             projectRoot,
             webpackConfig: config,
         }));
+    }
+
+    if (hmr) {
+        config.plugins.push(new webpack.HotModuleReplacementPlugin());
     }
 
     return config;

@@ -1,6 +1,0 @@
-{
-  "presets": [
-    ["env", { "cacheDirectory": true }]
-  ],
-  "plugins": ["transform-object-rest-spread"]
-}
